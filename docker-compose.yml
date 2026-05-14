@@ -1,0 +1,44 @@
+version: '3.8' # Bạn nên thêm version để Docker Compose hiểu đúng cú pháp
+
+services:
+  # ==========================================
+  # 1. CORE BANKING DATABASE (POSTGRESQL)
+  # ==========================================
+  postgres_db:
+    image: postgres:15
+    container_name: core_banking_db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secretpassword
+      POSTGRES_DB: banking_system
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # ==========================================
+  # 2. AML ANALYTICS PIPELINE (NEO4J)
+  # ==========================================
+  neo4j:
+    image: neo4j:latest
+    container_name: banking_neo4j
+    restart: always
+    ports:
+      - "7474:7474" # Giao diện Neo4j Browser để bạn vào xem biểu đồ
+      - "7687:7687" # Port Bolt để NestJS gọi API vào
+    environment:
+      - NEO4J_AUTH=neo4j/password # KHỚP VỚI CẤU HÌNH TRONG neo4j.service.ts
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+      - neo4j_import:/var/lib/neo4j/import
+
+# ==========================================
+# KHAI BÁO Ổ CỨNG ẢO (VOLUMES)
+# ==========================================
+volumes:
+  postgres_data:
+  neo4j_data:
+  neo4j_logs:
+  neo4j_import:

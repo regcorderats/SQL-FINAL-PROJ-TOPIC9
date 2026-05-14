@@ -1,0 +1,3222 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.gitignore
+AGENTS.md
+CLAUDE.md
+components.json
+eslint.config.mjs
+next.config.ts
+package.json
+postcss.config.mjs
+public/file.svg
+public/globe.svg
+public/next.svg
+public/vercel.svg
+public/window.svg
+README.md
+src/app/(auth)/layout.tsx
+src/app/(auth)/login/page.tsx
+src/app/(dashboard)/branches/page.tsx
+src/app/(dashboard)/customer/history/page.tsx
+src/app/(dashboard)/customer/page.tsx
+src/app/(dashboard)/customer/profile/page.tsx
+src/app/(dashboard)/customer/transfer/page.tsx
+src/app/(dashboard)/layout.tsx
+src/app/(dashboard)/manager/page.tsx
+src/app/(dashboard)/reports/page.tsx
+src/app/(dashboard)/teller/page.tsx
+src/app/favicon.ico
+src/app/globals.css
+src/app/layout.tsx
+src/app/register/page.tsx
+src/app/transaction/pending/page.tsx
+src/components/OverviewChart.tsx
+src/components/Sidebar.tsx
+src/components/ui/alert.tsx
+src/components/ui/badge.tsx
+src/components/ui/button.tsx
+src/components/ui/card.tsx
+src/components/ui/chart.tsx
+src/components/ui/input.tsx
+src/components/ui/label.tsx
+src/components/ui/progress.tsx
+src/components/ui/select.tsx
+src/components/ui/table.tsx
+src/components/ui/tabs.tsx
+src/lib/utils.ts
+tsconfig.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".gitignore">
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+</file>
+
+<file path="AGENTS.md">
+<!-- BEGIN:nextjs-agent-rules -->
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+<!-- END:nextjs-agent-rules -->
+</file>
+
+<file path="CLAUDE.md">
+@AGENTS.md
+</file>
+
+<file path="components.json">
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "radix-nova",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "src/app/globals.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "iconLibrary": "lucide",
+  "rtl": false,
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  },
+  "menuColor": "default",
+  "menuAccent": "subtle",
+  "registries": {}
+}
+</file>
+
+<file path="eslint.config.mjs">
+import { defineConfig, globalIgnores } from "eslint/config";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTs from "eslint-config-next/typescript";
+
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  // Override default ignores of eslint-config-next.
+  globalIgnores([
+    // Default ignores of eslint-config-next:
+    ".next/**",
+    "out/**",
+    "build/**",
+    "next-env.d.ts",
+  ]),
+]);
+
+export default eslintConfig;
+</file>
+
+<file path="next.config.ts">
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+};
+
+export default nextConfig;
+</file>
+
+<file path="package.json">
+{
+  "name": "banking-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.14.0",
+    "next": "16.2.6",
+    "radix-ui": "^1.4.3",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "recharts": "^3.8.0",
+    "shadcn": "^4.7.0",
+    "tailwind-merge": "^3.6.0",
+    "tw-animate-css": "^1.4.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
+</file>
+
+<file path="postcss.config.mjs">
+const config = {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
+
+export default config;
+</file>
+
+<file path="public/file.svg">
+<svg fill="none" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 13.5V5.41a1 1 0 0 0-.3-.7L9.8.29A1 1 0 0 0 9.08 0H1.5v13.5A2.5 2.5 0 0 0 4 16h8a2.5 2.5 0 0 0 2.5-2.5m-1.5 0v-7H8v-5H3v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1M9.5 5V2.12L12.38 5zM5.13 5h-.62v1.25h2.12V5zm-.62 3h7.12v1.25H4.5zm.62 3h-.62v1.25h7.12V11z" clip-rule="evenodd" fill="#666" fill-rule="evenodd"/></svg>
+</file>
+
+<file path="public/globe.svg">
+<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g clip-path="url(#a)"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.27 14.1a6.5 6.5 0 0 0 3.67-3.45q-1.24.21-2.7.34-.31 1.83-.97 3.1M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.48-1.52a7 7 0 0 1-.96 0H7.5a4 4 0 0 1-.84-1.32q-.38-.89-.63-2.08a40 40 0 0 0 3.92 0q-.25 1.2-.63 2.08a4 4 0 0 1-.84 1.31zm2.94-4.76q1.66-.15 2.95-.43a7 7 0 0 0 0-2.58q-1.3-.27-2.95-.43a18 18 0 0 1 0 3.44m-1.27-3.54a17 17 0 0 1 0 3.64 39 39 0 0 1-4.3 0 17 17 0 0 1 0-3.64 39 39 0 0 1 4.3 0m1.1-1.17q1.45.13 2.69.34a6.5 6.5 0 0 0-3.67-3.44q.65 1.26.98 3.1M8.48 1.5l.01.02q.41.37.84 1.31.38.89.63 2.08a40 40 0 0 0-3.92 0q.25-1.2.63-2.08a4 4 0 0 1 .85-1.32 7 7 0 0 1 .96 0m-2.75.4a6.5 6.5 0 0 0-3.67 3.44 29 29 0 0 1 2.7-.34q.31-1.83.97-3.1M4.58 6.28q-1.66.16-2.95.43a7 7 0 0 0 0 2.58q1.3.27 2.95.43a18 18 0 0 1 0-3.44m.17 4.71q-1.45-.12-2.69-.34a6.5 6.5 0 0 0 3.67 3.44q-.65-1.27-.98-3.1" fill="#666"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h16v16H0z"/></clipPath></defs></svg>
+</file>
+
+<file path="public/next.svg">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 394 80"><path fill="#000" d="M262 0h68.5v12.7h-27.2v66.6h-13.6V12.7H262V0ZM149 0v12.7H94v20.4h44.3v12.6H94v21h55v12.6H80.5V0h68.7zm34.3 0h-17.8l63.8 79.4h17.9l-32-39.7 32-39.6h-17.9l-23 28.6-23-28.6zm18.3 56.7-9-11-27.1 33.7h17.8l18.3-22.7z"/><path fill="#000" d="M81 79.3 17 0H0v79.3h13.6V17l50.2 62.3H81Zm252.6-.4c-1 0-1.8-.4-2.5-1s-1.1-1.6-1.1-2.6.3-1.8 1-2.5 1.6-1 2.6-1 1.8.3 2.5 1a3.4 3.4 0 0 1 .6 4.3 3.7 3.7 0 0 1-3 1.8zm23.2-33.5h6v23.3c0 2.1-.4 4-1.3 5.5a9.1 9.1 0 0 1-3.8 3.5c-1.6.8-3.5 1.3-5.7 1.3-2 0-3.7-.4-5.3-1s-2.8-1.8-3.7-3.2c-.9-1.3-1.4-3-1.4-5h6c.1.8.3 1.6.7 2.2s1 1.2 1.6 1.5c.7.4 1.5.5 2.4.5 1 0 1.8-.2 2.4-.6a4 4 0 0 0 1.6-1.8c.3-.8.5-1.8.5-3V45.5zm30.9 9.1a4.4 4.4 0 0 0-2-3.3 7.5 7.5 0 0 0-4.3-1.1c-1.3 0-2.4.2-3.3.5-.9.4-1.6 1-2 1.6a3.5 3.5 0 0 0-.3 4c.3.5.7.9 1.3 1.2l1.8 1 2 .5 3.2.8c1.3.3 2.5.7 3.7 1.2a13 13 0 0 1 3.2 1.8 8.1 8.1 0 0 1 3 6.5c0 2-.5 3.7-1.5 5.1a10 10 0 0 1-4.4 3.5c-1.8.8-4.1 1.2-6.8 1.2-2.6 0-4.9-.4-6.8-1.2-2-.8-3.4-2-4.5-3.5a10 10 0 0 1-1.7-5.6h6a5 5 0 0 0 3.5 4.6c1 .4 2.2.6 3.4.6 1.3 0 2.5-.2 3.5-.6 1-.4 1.8-1 2.4-1.7a4 4 0 0 0 .8-2.4c0-.9-.2-1.6-.7-2.2a11 11 0 0 0-2.1-1.4l-3.2-1-3.8-1c-2.8-.7-5-1.7-6.6-3.2a7.2 7.2 0 0 1-2.4-5.7 8 8 0 0 1 1.7-5 10 10 0 0 1 4.3-3.5c2-.8 4-1.2 6.4-1.2 2.3 0 4.4.4 6.2 1.2 1.8.8 3.2 2 4.3 3.4 1 1.4 1.5 3 1.5 5h-5.8z"/></svg>
+</file>
+
+<file path="public/vercel.svg">
+<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1155 1000"><path d="m577.3 0 577.4 1000H0z" fill="#fff"/></svg>
+</file>
+
+<file path="public/window.svg">
+<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 2.5h13v10a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1zM0 1h16v11.5a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 0 12.5zm3.75 4.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5M7 4.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0m1.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5" fill="#666"/></svg>
+</file>
+
+<file path="README.md">
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+</file>
+
+<file path="src/app/(auth)/layout.tsx">
+import React from 'react';
+
+export default function AuthLayout({ children }: { children: React.ReactNode }) {
+  return (
+    // Đổi sang grid-cols-3 để chia tỉ lệ 2/3 (Navy) và 1/3 (Trắng)
+    <div className="min-h-screen grid grid-cols-1 md:grid-cols-3 bg-light-bg">
+      
+      {/* Cột trái: Chiếm 2/3 màn hình (col-span-2) */}
+      <div className="hidden md:flex md:col-span-2 flex-col justify-center items-center bg-navy text-pure-white p-12 shadow-[10px_0_30px_rgba(0,0,0,0.2)] z-10 relative">
+        {/* Khung viền trang trí góc */}
+        <div className="absolute top-10 left-10 w-24 h-24 border-t-4 border-l-4 border-gold opacity-50"></div>
+        <div className="absolute bottom-10 right-10 w-24 h-24 border-b-4 border-r-4 border-gold opacity-50"></div>
+
+        <div className="text-center flex flex-col items-center">
+          <h1 className="font-logo text-[12rem] text-gold tracking-widest leading-none drop-shadow-2xl">
+            Aurora
+          </h1>
+          
+          {/* Slogan: Tiếng Anh, font Merriweather, in nghiêng, màu vàng nhạt, kéo sát lên trên */}
+          <p className="font-heading italic text-gold/80 text-2xl tracking-wide -mt-8 font-light drop-shadow-md">
+            "Empowering your financial horizon"
+          </p>
+        </div>
+      </div>
+
+      {/* Cột phải: Chiếm 1/3 màn hình (col-span-1) */}
+      <div className="md:col-span-1 flex items-center justify-center p-8 relative">
+        {children}
+      </div>
+      
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/(auth)/login/page.tsx">
+"use client"; // Bắt buộc phải có dòng này để dùng state và form event
+
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
+export default function LoginPage() {
+  const router = useRouter();
+  
+  // 1. Khai báo state để lưu dữ liệu người dùng nhập
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
+  // State để quản lý trạng thái hiển thị
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  // 2. Hàm xử lý khi bấm nút Submit
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault(); // Chặn hành vi load lại trang mặc định của form
+    setLoading(true);
+    setError(''); // Reset lỗi cũ nếu có
+
+    try {
+      // Gọi xuống Backend đang chạy ở cổng 3001
+      const res = await fetch('http://localhost:3001/users/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        // Bắt lỗi từ Interceptor/Filter của Backend trả về
+        throw new Error(data.message || 'Đăng nhập thất bại');
+      }
+
+      // 3. THÀNH CÔNG: Lưu thông tin và điều hướng
+      console.log('Thông tin user:', data.data); // Mở F12 để xem data trả về
+      
+      // Tạm lưu thông tin user vào localStorage để các trang sau biết ai đang đăng nhập
+      localStorage.setItem('user', JSON.stringify(data.data));
+
+      // Dựa vào Role để đá user sang Dashboard tương ứng
+      const role = data.data.role;
+      
+      if (role === 'CUSTOMER') {
+        router.push('/customer');
+      } else if (role === 'TELLER') {
+        router.push('/teller');
+      } else if (role === 'MANAGER') {
+        router.push('/manager');        // ← Sửa thành /manager
+      } else if (role === 'AUDITOR') {
+        router.push('/auditor');
+      } else {
+        router.push('/customer');
+      }
+
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="w-full max-w-md bg-pure-white rounded-2xl shadow-xl p-10 border border-gray-200 relative">
+      <div className="text-center mb-10">
+        <h1 className="font-logo text-6xl text-navy md:hidden mb-4">Aurora</h1>
+        <h2 className="font-heading text-3xl text-navy mb-2">Đăng nhập</h2>
+        <p className="font-body text-gray-500">Vui lòng nhập thông tin hệ thống</p>
+      </div>
+
+      {/* Hiển thị bảng báo lỗi nếu có */}
+      {error && (
+        <div className="mb-6 p-3 bg-red-50 border border-red-200 text-red-600 text-sm rounded-lg font-body text-center font-semibold">
+          {error}
+        </div>
+      )}
+
+      {/* Lưu ý: Thêm onSubmit vào form */}
+      <form onSubmit={handleLogin} className="space-y-6">
+        <div className="space-y-2">
+          <label className="font-body font-bold text-navy block" htmlFor="email">
+            Email / Tên đăng nhập
+          </label>
+          <input 
+            id="email" 
+            type="email" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)} // Cập nhật state khi gõ
+            placeholder="user@aurora.bank" 
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent font-body transition-all"
+            required 
+            disabled={loading}
+          />
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex justify-between items-center">
+            <label className="font-body font-bold text-navy" htmlFor="password">
+              Mật khẩu
+            </label>
+            <a href="#" className="text-sm font-body text-navy hover:text-gold font-semibold transition-colors">
+              Quên mật khẩu?
+            </a>
+          </div>
+          <input 
+            id="password" 
+            type="password" 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)} // Cập nhật state khi gõ
+            placeholder="••••••••" 
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent font-body transition-all"
+            required 
+            disabled={loading}
+          />
+        </div>
+
+        {/* Nút Submit đổi trạng thái theo loading */}
+        <button 
+          type="submit" 
+          disabled={loading}
+          className={`w-full bg-navy text-pure-white font-heading font-bold text-lg py-3.5 rounded-lg transition-all mt-4 
+            ${loading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-navy/90 hover:shadow-lg active:scale-[0.98]'}`}
+        >
+          {loading ? 'Đang xác thực...' : 'Truy cập hệ thống'}
+        </button>
+      </form>
+
+      <div className="mt-8 text-center font-body text-sm text-gray-600 border-t pt-6">
+        Bạn chưa có tài khoản khách hàng?{' '}
+        <Link href="/register" className="text-gold font-bold hover:underline">
+          Mở tài khoản ngay
+        </Link>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/(dashboard)/branches/page.tsx">
+"use client";
+
+import React, { useEffect, useState } from 'react';
+
+export default function BranchManagement() {
+  const [branches, setBranches] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [newBranch, setNewBranch] = useState({ name: '', code: '', location: '' });
+
+  const fetchBranches = async () => {
+    try {
+      const res = await fetch('http://localhost:3001/branches');
+      const data = await res.json();
+      setBranches(data.data || []);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchBranches();
+  }, []);
+
+  const handleCreate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const res = await fetch('http://localhost:3001/branches', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newBranch),
+      });
+
+      if (res.ok) {
+        alert('Tạo chi nhánh thành công!');
+        setNewBranch({ name: '', code: '', location: '' });
+        setShowCreateForm(false);
+        fetchBranches();
+      }
+    } catch (err) {
+      alert('Có lỗi khi tạo chi nhánh');
+    }
+  };
+
+  const handleSoftDelete = async (id: string) => {
+    if (!confirm('Xác nhận đóng cửa chi nhánh này?')) return;
+
+    try {
+      const res = await fetch(`http://localhost:3001/branches/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        alert('Đã đóng cửa chi nhánh thành công');
+        fetchBranches();
+      }
+    } catch (err) {
+      alert('Có lỗi khi thực hiện');
+    }
+  };
+
+  return (
+    <div className="space-y-8">
+      <div className="flex justify-between items-center">
+        <div>
+          <h2 className="font-heading text-4xl text-[#14213d]">Quản lý Chi nhánh</h2>
+          <p className="text-gray-600 mt-2">Quản trị hệ thống chi nhánh ngân hàng</p>
+        </div>
+        <button
+          onClick={() => setShowCreateForm(!showCreateForm)}
+          className="bg-[#14213d] text-white px-6 py-3 rounded-2xl hover:bg-black transition"
+        >
+          + Thêm Chi nhánh mới
+        </button>
+      </div>
+
+      {/* Form tạo chi nhánh */}
+      {showCreateForm && (
+        <div className="bg-white rounded-3xl p-8 shadow-sm">
+          <h3 className="font-heading text-xl mb-6">Tạo Chi nhánh Mới</h3>
+          <form onSubmit={handleCreate} className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label className="block font-bold mb-2">Tên chi nhánh</label>
+              <input
+                type="text"
+                value={newBranch.name}
+                onChange={(e) => setNewBranch({ ...newBranch, name: e.target.value })}
+                className="w-full px-5 py-4 border rounded-2xl"
+                required
+              />
+            </div>
+            <div>
+              <label className="block font-bold mb-2">Mã chi nhánh</label>
+              <input
+                type="text"
+                value={newBranch.code}
+                onChange={(e) => setNewBranch({ ...newBranch, code: e.target.value })}
+                className="w-full px-5 py-4 border rounded-2xl"
+                required
+              />
+            </div>
+            <div>
+              <label className="block font-bold mb-2">Địa chỉ</label>
+              <input
+                type="text"
+                value={newBranch.location}
+                onChange={(e) => setNewBranch({ ...newBranch, location: e.target.value })}
+                className="w-full px-5 py-4 border rounded-2xl"
+              />
+            </div>
+            <div className="md:col-span-3">
+              <button type="submit" className="bg-[#14213d] text-white px-10 py-4 rounded-2xl hover:bg-black">
+                Tạo chi nhánh
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {/* Danh sách chi nhánh */}
+      <div className="bg-white rounded-3xl shadow-sm overflow-hidden">
+        <table className="w-full">
+          <thead className="bg-gray-50 border-b">
+            <tr>
+              <th className="px-8 py-5 text-left">Tên Chi nhánh</th>
+              <th className="px-8 py-5 text-left">Mã</th>
+              <th className="px-8 py-5 text-left">Địa chỉ</th>
+              <th className="px-8 py-5 text-center">Trạng thái</th>
+              <th className="px-8 py-5 text-center">Thao tác</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y">
+            {loading ? (
+              <tr><td colSpan={5} className="text-center py-12">Đang tải...</td></tr>
+            ) : branches.length === 0 ? (
+              <tr><td colSpan={5} className="text-center py-12 text-gray-400">Chưa có chi nhánh nào</td></tr>
+            ) : (
+              branches.map((branch: any) => (
+                <tr key={branch.id} className="hover:bg-gray-50">
+                  <td className="px-8 py-5 font-medium">{branch.name}</td>
+                  <td className="px-8 py-5 font-mono">{branch.code}</td>
+                  <td className="px-8 py-5 text-gray-600">{branch.location || '—'}</td>
+                  <td className="px-8 py-5 text-center">
+                    <span className={`inline-block px-4 py-1 rounded-full text-xs font-medium ${branch.isActive ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}`}>
+                      {branch.isActive ? 'Hoạt động' : 'Đã đóng'}
+                    </span>
+                  </td>
+                  <td className="px-8 py-5 text-center">
+                    <button
+                      onClick={() => handleSoftDelete(branch.id)}
+                      className="text-red-600 hover:text-red-700 font-medium"
+                    >
+                      Đóng cửa
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/(dashboard)/customer/history/page.tsx">
+"use client";
+
+import React, { useEffect, useState } from 'react';
+
+export default function CustomerHistory() {
+  const [user, setUser] = useState<any>(null);
+  const [transactions, setTransactions] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!user?.id) return;
+
+    const fetchHistory = async () => {
+      try {
+        const res = await fetch('http://localhost:3001/api/transactions/history', {
+          method: 'POST', // vì controller đang dùng @Body
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId: user.id }),
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          setTransactions(data.data || []);
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHistory();
+  }, [user]);
+
+  if (loading) return <div className="text-center py-20 text-xl">Đang tải lịch sử giao dịch...</div>;
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h2 className="font-heading text-4xl text-[#14213d]">Lịch sử giao dịch</h2>
+        <p className="text-gray-600 mt-2">Tất cả giao dịch của bạn</p>
+      </div>
+
+      <div className="bg-white rounded-3xl shadow-sm overflow-hidden">
+        <table className="w-full">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-5 text-left">Thời gian</th>
+              <th className="px-6 py-5 text-left">Loại</th>
+              <th className="px-6 py-5 text-left">Từ</th>
+              <th className="px-6 py-5 text-left">Đến</th>
+              <th className="px-6 py-5 text-right">Số tiền</th>
+              <th className="px-6 py-5 text-center">Trạng thái</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y">
+            {transactions.length === 0 ? (
+              <tr>
+                <td colSpan={6} className="px-6 py-20 text-center text-gray-400 text-lg">
+                  Chưa có giao dịch nào
+                </td>
+              </tr>
+            ) : (
+              transactions.map((tx: any) => (
+                <tr key={tx.id} className="hover:bg-gray-50">
+                  <td className="px-6 py-5 text-sm">
+                    {new Date(tx.createdAt).toLocaleString('vi-VN')}
+                  </td>
+                  <td className="px-6 py-5">
+                    <span className="capitalize px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
+                      {tx.type}
+                    </span>
+                  </td>
+                  <td className="px-6 py-5 font-mono text-sm break-all">{tx.fromAccountId}</td>
+                  <td className="px-6 py-5 font-mono text-sm break-all">{tx.toAccountId}</td>
+                  <td className="px-6 py-5 text-right font-semibold text-lg">
+                    {Number(tx.amount).toLocaleString('vi-VN')} ₫
+                  </td>
+                  <td className="px-6 py-5 text-center">
+                    <span className={`px-4 py-1 rounded-full text-xs font-medium
+                      ${tx.status === 'APPROVED' ? 'bg-emerald-100 text-emerald-700' : 
+                        tx.status === 'REJECTED' ? 'bg-red-100 text-red-700' : 
+                        'bg-amber-100 text-amber-700'}`}>
+                      {tx.status}
+                    </span>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/(dashboard)/customer/page.tsx">
+"use client";
+
+import React, { useEffect, useState } from 'react';
+
+export default function CustomerDashboard() {
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  if (!user) return null;
+
+  const account = user.accounts?.[0] || { balance: 0, frozenBalance: 0 };
+
+  return (
+    <div className="space-y-8">
+      {/* Header Greeting */}
+      <div>
+        <h2 className="font-heading text-4xl text-[#14213d]">
+          Xin chào, {user.profile?.fullName || 'Khách hàng'}!
+        </h2>
+        <p className="text-gray-600 mt-1 text-lg">
+          Chào mừng bạn trở lại với Aurora Bank. Đây là tổng quan tài chính của bạn hôm nay.
+        </p>
+      </div>
+
+      {/* Quick Actions */}
+      <div className="flex gap-4">
+        <a 
+          href="/customer/transfer"
+          className="flex-1 bg-[#14213d] hover:bg-black text-white py-5 rounded-3xl text-center font-medium text-lg transition-all active:scale-[0.98]"
+        >
+          Chuyển khoản ngay
+        </a>
+        <a 
+          href="/customer/history"
+          className="flex-1 bg-[#14213d] hover:bg-black text-white py-5 rounded-3xl text-center font-medium text-lg transition-all active:scale-[0.98]"
+        >
+          Lịch sử giao dịch
+        </a>
+      </div>
+
+      {/* Balance Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Số dư khả dụng */}
+        <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
+          <div className="flex justify-between items-start">
+            <div>
+              <p className="uppercase text-xs tracking-widest text-gray-500 font-medium">Số dư khả dụng</p>
+              <p className="text-5xl font-bold text-[#14213d] mt-4">
+                {Number(account.balance).toLocaleString('vi-VN')}
+                <span className="text-2xl text-[#fca311] ml-2">VND</span>
+              </p>
+            </div>
+            <div className="w-14 h-14 bg-[#fca311]/10 rounded-2xl flex items-center justify-center text-2xl">
+            </div>
+          </div>
+          <p className="text-xs text-gray-400 mt-6">
+            Cập nhật lúc: {new Date().toLocaleTimeString('vi-VN')}
+          </p>
+        </div>
+
+        {/* Số dư đang chờ xử lý */}
+        <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
+          <div className="flex justify-between items-start">
+            <div>
+              <p className="uppercase text-xs tracking-widest text-gray-500 font-medium">Số dư đang chờ xử lý</p>
+              <p className="text-5xl font-bold text-amber-600 mt-4">
+                {Number(account.frozenBalance).toLocaleString('vi-VN')}
+                <span className="text-2xl ml-2">VND</span>
+              </p>
+            </div>
+            <div className="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-2xl">
+            </div>
+          </div>
+          <p className="text-xs text-gray-400 mt-6 italic">Tiền đang được Manager duyệt</p>
+        </div>
+      </div>
+
+      {/* Lịch sử giao dịch */}
+      <div className="bg-white rounded-3xl p-8 shadow-sm">
+        <h3 className="font-heading text-xl mb-4 text-[#14213d]">Lịch sử giao dịch gần đây</h3>
+        <p className="text-gray-400 italic py-12 text-center">Chưa có giao dịch nào gần đây.</p>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/(dashboard)/customer/profile/page.tsx">
+"use client";
+
+import React, { useEffect, useState } from 'react';
+
+export default function CustomerProfile() {
+  const [user, setUser] = useState<any>(null);
+  const [formData, setFormData] = useState<any>({});
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState<{type: 'success'|'error', text: string} | null>(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const u = JSON.parse(storedUser);
+      setUser(u);
+      setFormData(u.profile || {});
+    }
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage(null);
+
+    try {
+      setMessage({ 
+        type: 'success', 
+        text: 'Thông tin hồ sơ đã được cập nhật thành công!' 
+      });
+    } catch (err) {
+      setMessage({ type: 'error', text: 'Có lỗi xảy ra khi cập nhật' });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="max-w-6xl mx-auto">
+      <div className="mb-10">
+        <h1 className="font-heading text-5xl text-[#14213d]">Hồ sơ cá nhân</h1>
+        <p className="text-gray-600 text-lg mt-2">Quản lý thông tin cá nhân và tài khoản của bạn</p>
+      </div>
+
+      {message && (
+        <div className={`mb-8 p-5 rounded-2xl text-center font-medium ${
+          message.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-600'
+        }`}>
+          {message.text}
+        </div>
+      )}
+
+      <div className="bg-white rounded-3xl shadow-sm p-12">
+        <form onSubmit={handleSubmit} className="space-y-12">
+          
+          {/* Thông tin cơ bản */}
+          <div>
+            <h3 className="font-heading text-2xl text-[#14213d] mb-6 border-b pb-4">Thông tin cơ bản</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <label className="block font-bold text-[#14213d] mb-2">Họ và tên</label>
+                <input type="text" value={formData.fullName || ''} disabled className="w-full px-6 py-4 border border-gray-300 rounded-2xl bg-gray-50" />
+              </div>
+              <div>
+                <label className="block font-bold text-[#14213d] mb-2">Email</label>
+                <input type="email" value={user?.email || ''} disabled className="w-full px-6 py-4 border border-gray-300 rounded-2xl bg-gray-50" />
+              </div>
+            </div>
+          </div>
+
+          {/* Thông tin chi tiết */}
+          <div>
+            <h3 className="font-heading text-2xl text-[#14213d] mb-6 border-b pb-4">Thông tin chi tiết</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div>
+                <label className="block font-bold text-[#14213d] mb-2">Số điện thoại</label>
+                <input type="tel" name="phone" value={formData.phone || ''} onChange={handleChange} className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#fca311]" />
+              </div>
+              <div>
+                <label className="block font-bold text-[#14213d] mb-2">Ngày sinh</label>
+                <input type="date" name="dateOfBirth" value={formData.dateOfBirth || ''} onChange={handleChange} className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#fca311]" />
+              </div>
+              <div>
+                <label className="block font-bold text-[#14213d] mb-2">Giới tính</label>
+                <select name="gender" value={formData.gender || ''} onChange={handleChange} className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#fca311]">
+                  <option value="">Chọn giới tính</option>
+                  <option value="Male">Nam</option>
+                  <option value="Female">Nữ</option>
+                  <option value="Other">Khác</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <label className="block font-bold text-[#14213d] mb-2">Địa chỉ thường trú</label>
+                <input type="text" name="address" value={formData.address || ''} onChange={handleChange} placeholder="Số nhà, đường phố, phường/xã..." className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#fca311]" />
+              </div>
+              <div>
+                <label className="block font-bold text-[#14213d] mb-2">Thành phố / Tỉnh</label>
+                <input type="text" name="city" value={formData.city || ''} onChange={handleChange} className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#fca311]" />
+              </div>
+            </div>
+          </div>
+
+          {/* Thông tin tài chính */}
+          <div>
+            <h3 className="font-heading text-2xl text-[#14213d] mb-6 border-b pb-4">Thông tin tài chính</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div>
+                <label className="block font-bold text-[#14213d] mb-2">Thu nhập hàng tháng (VND)</label>
+                <input type="number" name="income" value={formData.income || ''} onChange={handleChange} className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#fca311]" />
+              </div>
+              <div>
+                <label className="block font-bold text-[#14213d] mb-2">Trình độ học vấn</label>
+                <select name="education" value={formData.education || ''} onChange={handleChange} className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#fca311]">
+                  <option value="">Chọn trình độ</option>
+                  <option value="High School">THPT</option>
+                  <option value="Bachelor">Cử nhân</option>
+                  <option value="Master">Thạc sĩ</option>
+                  <option value="Doctorate">Tiến sĩ</option>
+                </select>
+              </div>
+              <div>
+                <label className="block font-bold text-[#14213d] mb-2">Số CMND/CCCD</label>
+                <input type="text" name="identityNumber" value={formData.identityNumber || ''} onChange={handleChange} className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#fca311]" />
+              </div>
+            </div>
+          </div>
+
+          <button 
+            type="submit" 
+            disabled={loading}
+            className="w-full py-6 bg-[#14213d] hover:bg-black text-white font-heading text-xl rounded-2xl transition-all mt-6"
+          >
+            {loading ? 'Đang cập nhật...' : 'Cập nhật thông tin hồ sơ'}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/(dashboard)/customer/transfer/page.tsx">
+"use client";
+
+import React, { useState, useEffect } from 'react';
+
+export default function CustomerTransfer() {
+  const [user, setUser] = useState<any>(null);
+  const [toAccountId, setToAccountId] = useState('');
+  const [amount, setAmount] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState<{type: 'success'|'error', text: string} | null>(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) setUser(JSON.parse(storedUser));
+  }, []);
+
+  const handleTransfer = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!user?.accounts?.[0]) return;
+
+    setLoading(true);
+    setMessage(null);
+
+    try {
+      const res = await fetch('http://localhost:3001/api/transactions/transfer/maker', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          makerId: user.id,
+          fromAccountId: user.accounts[0].id,
+          toAccountId,
+          amount: Number(amount),
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.message || 'Chuyển tiền thất bại');
+
+      setMessage({ type: 'success', text: 'Lệnh chuyển tiền đã được tạo thành công. Chờ Manager duyệt!' });
+      setToAccountId('');
+      setAmount('');
+
+    } catch (err: any) {
+      setMessage({ type: 'error', text: err.message });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="max-w-lg mx-auto">
+      {/* Title */}
+      <div className="text-center mb-10">
+        <h2 className="font-heading text-4xl text-[#14213d]">Chuyển khoản</h2>
+        <p className="text-gray-600 mt-2">Chuyển tiền nội bộ • An toàn • Nhanh chóng</p>
+      </div>
+
+      <div className="bg-white rounded-3xl shadow-sm p-10 border border-gray-100">
+        {message && (
+          <div className={`mb-8 p-4 rounded-2xl text-center font-medium ${
+            message.type === 'success' 
+              ? 'bg-green-50 text-green-700 border border-green-200' 
+              : 'bg-red-50 text-red-600 border border-red-200'
+          }`}>
+            {message.text}
+          </div>
+        )}
+
+        <form onSubmit={handleTransfer} className="space-y-8">
+          {/* Tài khoản nguồn */}
+          <div>
+            <label className="block font-bold text-[#14213d] mb-2">Tài khoản nguồn</label>
+            <div className="p-4 bg-gray-50 rounded-2xl text-gray-700 font-mono">
+              {user?.accounts?.[0]?.id || 'Chưa có tài khoản'}
+            </div>
+          </div>
+
+          {/* Tài khoản nhận */}
+          <div>
+            <label className="block font-bold text-[#14213d] mb-2">Tài khoản nhận</label>
+            <input
+              type="text"
+              value={toAccountId}
+              onChange={(e) => setToAccountId(e.target.value)}
+              placeholder="Nhập UUID tài khoản nhận"
+              className="w-full px-5 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#fca311] font-body"
+              required
+            />
+          </div>
+
+          {/* Số tiền */}
+          <div>
+            <label className="block font-bold text-[#14213d] mb-2">Số tiền chuyển (VND)</label>
+            <input
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              placeholder="0"
+              min="10000"
+              className="w-full px-5 py-4 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#fca311] text-3xl font-semibold font-body"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-5 bg-[#14213d] hover:bg-black text-white font-heading text-xl rounded-2xl transition-all disabled:opacity-70"
+          >
+            {loading ? 'Đang xử lý...' : 'Xác nhận chuyển tiền'}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/(dashboard)/layout.tsx">
+"use client";
+
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useRouter, usePathname } from 'next/navigation';
+import { 
+  LayoutDashboard, ArrowRightLeft, ShieldCheck, FileText, LogOut, User, Building 
+} from 'lucide-react';
+
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<any>(null);
+  const router = useRouter();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (!storedUser) {
+      router.push('/login');
+    } else {
+      setUser(JSON.parse(storedUser));
+    }
+  }, [router]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    router.push('/login');
+  };
+
+  if (!user) {
+    return <div className="min-h-screen flex items-center justify-center bg-[#e5e5e5]">Đang tải...</div>;
+  }
+
+  const role = user.role || 'CUSTOMER';
+  const roleLabel = role === 'TELLER' ? 'TELLER PORTAL' :
+                   role === 'MANAGER' ? 'MANAGER PORTAL' :
+                   role === 'AUDITOR' ? 'AUDITOR PORTAL' : 'CUSTOMER PORTAL';
+
+  const getMenuItems = () => {
+    const items = [
+      { href: `/${role.toLowerCase()}`, label: 'Tổng quan', icon: LayoutDashboard },
+    ];
+
+    if (role === 'CUSTOMER') {
+        items.push({ href: '/customer/profile', label: 'Hồ sơ cá nhân', icon: User });
+    }
+    if (['TELLER', 'MANAGER'].includes(role)) {
+        items.push({ href: '/transactions/maker', label: 'Tạo Lệnh', icon: ArrowRightLeft });
+    }
+
+    if (role === 'MANAGER') {
+        items.push({ href: '/transactions/pending', label: 'Duyệt Lệnh', icon: ShieldCheck });
+    }
+
+    if (['MANAGER', 'AUDITOR'].includes(role)) {
+        items.push({ href: '/reports', label: 'Báo cáo', icon: FileText });
+        items.push({ href: '/branches', label: 'Quản lý Chi nhánh', icon: Building }); // cần import Building từ lucide-react
+    }
+    return items;
+  };
+
+  const menuItems = getMenuItems();
+  const isActive = (href: string) => pathname === href;
+
+  return (
+    <div className="min-h-screen flex bg-[#e5e5e5] font-body">
+      <aside className="w-72 bg-[#14213d] text-white flex flex-col shadow-2xl">
+        <div className="p-6 border-b border-white/10">
+          <h1 className="font-logo text-5xl text-[#fca311] tracking-wider">Aurora</h1>
+          <p className="text-[#fca311] text-xs tracking-[2px] mt-1 font-medium">{roleLabel}</p>
+        </div>
+
+        <nav className="flex-1 p-4 space-y-1">
+          {menuItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`flex items-center gap-3 px-5 py-3.5 rounded-2xl transition-all ${
+                  isActive(item.href) 
+                    ? 'bg-white/10 text-[#fca311] border-l-4 border-[#fca311]' 
+                    : 'hover:bg-white/5 text-white/80'
+                }`}
+              >
+                <Icon className="w-5 h-5" />
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="p-4 border-t border-white/10 mt-auto">
+          <div className="flex items-center gap-3 mb-4 px-2">
+            <div className="w-10 h-10 rounded-full bg-[#fca311] flex items-center justify-center text-[#14213d] font-bold text-xl">
+              {user.profile?.fullName?.[0] || 'U'}
+            </div>
+            <div className="text-sm">
+              <p className="font-medium">{user.profile?.fullName}</p>
+              <p className="text-white/60 text-xs">{user.email}</p>
+            </div>
+          </div>
+
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl bg-red-500/10 hover:bg-red-500/20 text-red-400 transition-colors"
+          >
+            <LogOut className="w-4 h-4" /> Đăng xuất
+          </button>
+        </div>
+      </aside>
+
+      <main className="flex-1 flex flex-col">
+        <header className="h-16 bg-white border-b flex items-center px-8">
+          <h1 className="font-heading text-2xl text-[#14213d] capitalize">
+            {role.toLowerCase()}
+          </h1>
+        </header>
+
+        <div className="flex-1 p-8 overflow-auto">
+          {children}
+        </div>
+      </main>
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/(dashboard)/manager/page.tsx">
+"use client";
+
+import React, { useEffect, useState } from 'react';
+
+export default function ManagerDashboard() {
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) setUser(JSON.parse(storedUser));
+  }, []);
+
+  if (!user) return null;
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h2 className="font-heading text-4xl text-[#14213d]">Chào Quản lý, {user.profile?.fullName}</h2>
+        <p className="text-gray-600 mt-2">Bảng điều khiển chi nhánh • Hôm nay</p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="bg-white p-8 rounded-3xl shadow-sm">
+          <p className="text-sm text-gray-500">LỆNH CHỜ DUYỆT</p>
+          <p className="text-5xl font-bold text-amber-600 mt-4">12</p>
+        </div>
+        <div className="bg-white p-8 rounded-3xl shadow-sm">
+          <p className="text-sm text-gray-500">TỔNG SỐ DƯ VAULT</p>
+          <p className="text-5xl font-bold text-[#14213d] mt-4">245M</p>
+        </div>
+        <div className="bg-white p-8 rounded-3xl shadow-sm">
+          <p className="text-sm text-gray-500">NHÂN VIÊN HOẠT ĐỘNG</p>
+          <p className="text-5xl font-bold text-emerald-600 mt-4">8</p>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-3xl p-8">
+        <h3 className="font-heading text-xl mb-4">Bạn có thể thực hiện</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <a href="/transactions/pending" className="block p-6 border rounded-2xl hover:border-[#fca311] transition">
+            <h4 className="font-semibold text-lg">Duyệt Lệnh Giao Dịch</h4>
+            <p className="text-gray-500 text-sm mt-2">Kiểm tra và phê duyệt các lệnh đang chờ</p>
+          </a>
+          <a href="/reports" className="block p-6 border rounded-2xl hover:border-[#fca311] transition">
+            <h4 className="font-semibold text-lg">Xem Báo Cáo</h4>
+            <p className="text-gray-500 text-sm mt-2">Báo cáo hoạt động &amp; đối soát</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/(dashboard)/reports/page.tsx">
+"use client";
+
+import React, { useEffect, useState } from 'react';
+
+export default function ReportsPage() {
+  const [summary, setSummary] = useState<any>(null);
+  const [dailyActivities, setDailyActivities] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchSummary = async () => {
+    try {
+      const res = await fetch('http://localhost:3001/reports/summary');
+      const data = await res.json();
+      setSummary(data.data);
+    } catch (err) {
+      console.error("Lỗi lấy summary:", err);
+    }
+  };
+
+  const fetchDaily = async () => {
+    try {
+      const res = await fetch('http://localhost:3001/reports/daily-activities');
+      const data = await res.json();
+      setDailyActivities(data.data || []);
+    } catch (err) {
+      console.error("Lỗi lấy daily activities:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchSummary();
+    fetchDaily();
+  }, []);
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h2 className="font-heading text-4xl text-[#14213d]">Báo cáo & Phân tích</h2>
+        <p className="text-gray-600">Tổng quan hoạt động hệ thống</p>
+      </div>
+
+      {/* Summary Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+          <p className="uppercase text-xs tracking-widest text-gray-500">Tổng Khách Hàng</p>
+          <p className="text-5xl font-bold text-[#14213d] mt-4">{summary?.totalUsers || 0}</p>
+        </div>
+
+        <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+          <p className="uppercase text-xs tracking-widest text-gray-500">Tài Khoản Active</p>
+          <p className="text-5xl font-bold text-emerald-600 mt-4">{summary?.totalActiveAccounts || 0}</p>
+        </div>
+
+        <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+          <p className="uppercase text-xs tracking-widest text-gray-500">Tổng Số Dư</p>
+          <p className="text-4xl font-bold text-[#14213d] mt-4">
+            {(summary?.totalBalance || 0).toLocaleString('vi-VN')} ₫
+          </p>
+        </div>
+
+        <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+          <p className="uppercase text-xs tracking-widest text-gray-500">Đang Đóng Băng</p>
+          <p className="text-4xl font-bold text-amber-600 mt-4">
+            {(summary?.totalFrozenBalance || 0).toLocaleString('vi-VN')} ₫
+          </p>
+        </div>
+      </div>
+
+      {/* Daily Activities Table */}
+      <div className="bg-white rounded-3xl p-8 shadow-sm">
+        <h3 className="font-heading text-2xl mb-6">Hoạt động gần đây</h3>
+        
+        {loading ? (
+          <p className="text-center py-12">Đang tải dữ liệu...</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead className="border-b">
+                <tr>
+                  <th className="px-6 py-4 text-left">Ngày</th>
+                  <th className="px-6 py-4 text-right">Số lệnh</th>
+                  <th className="px-6 py-4 text-right">Tổng giá trị (VND)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y">
+                {dailyActivities.length === 0 ? (
+                  <tr><td colSpan={3} className="text-center py-12 text-gray-400">Chưa có dữ liệu</td></tr>
+                ) : (
+                  dailyActivities.map((item: any, idx) => (
+                    <tr key={idx} className="hover:bg-gray-50">
+                      <td className="px-6 py-4">{new Date(item.date).toLocaleDateString('vi-VN')}</td>
+                      <td className="px-6 py-4 text-right font-medium">{item.total_count}</td>
+                      <td className="px-6 py-4 text-right font-semibold">
+                        {Number(item.total_amount || 0).toLocaleString('vi-VN')}
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/(dashboard)/teller/page.tsx">
+"use client";
+
+import React, { useEffect, useState } from 'react';
+
+type TabType = 'TRANSFER' | 'DEPOSIT' | 'WITHDRAWAL';
+
+export default function TellerDashboard() {
+  const [user, setUser] = useState<any>(null);
+  const [activeTab, setActiveTab] = useState<TabType>('TRANSFER');
+
+  const [fromAccountId, setFromAccountId] = useState('');
+  const [toAccountId, setToAccountId] = useState('');
+  const [vaultAccountId, setVaultAccountId] = useState('');
+  const [amount, setAmount] = useState('');
+  
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState<{type: 'success'|'error', text: string} | null>(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) setUser(JSON.parse(storedUser));
+  }, []);
+
+  const resetForm = () => {
+    setFromAccountId(''); setToAccountId(''); setVaultAccountId(''); setAmount('');
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage(null);
+
+    try {
+      let endpoint = '';
+      let body: any = { makerId: user?.id, amount: Number(amount) };
+
+      if (activeTab === 'TRANSFER') {
+        endpoint = 'http://localhost:3001/api/transactions/transfer/maker';
+        body.fromAccountId = fromAccountId;
+        body.toAccountId = toAccountId;
+      } else if (activeTab === 'DEPOSIT') {
+        endpoint = 'http://localhost:3001/api/transactions/deposit/maker';
+        body.customerAccountId = toAccountId;
+        body.vaultAccountId = vaultAccountId;
+      } else {
+        endpoint = 'http://localhost:3001/api/transactions/withdrawal/maker';
+        body.customerAccountId = fromAccountId;
+        body.vaultAccountId = vaultAccountId;
+      }
+
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.message || 'Tạo lệnh thất bại');
+
+      setMessage({ type: 'success', text: data.message || 'Tạo lệnh thành công!' });
+      resetForm();
+
+    } catch (err: any) {
+      setMessage({ type: 'error', text: err.message });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!user) return <div className="p-8">Đang tải...</div>;
+
+  return (
+    <div className="max-w-5xl mx-auto space-y-8">
+      <div>
+        <h2 className="font-heading text-4xl text-[#14213d]">Giao dịch viên</h2>
+        <p className="text-gray-600">Tạo lệnh giao dịch • Chờ Manager duyệt</p>
+      </div>
+
+      {/* Tabs */}
+      <div className="flex border-b">
+        {[
+          { key: 'TRANSFER', label: 'Chuyển khoản' },
+          { key: 'DEPOSIT', label: 'Nạp tiền mặt' },
+          { key: 'WITHDRAWAL', label: 'Rút tiền mặt' },
+        ].map(tab => (
+          <button
+            key={tab.key}
+            onClick={() => { setActiveTab(tab.key as TabType); resetForm(); }}
+            className={`px-10 py-4 text-lg font-medium border-b-4 transition-all ${
+              activeTab === tab.key 
+                ? 'border-[#fca311] text-[#14213d] font-semibold' 
+                : 'border-transparent text-gray-500 hover:text-gray-700'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="bg-white rounded-3xl p-10 shadow">
+        {message && (
+          <div className={`p-4 mb-8 rounded-2xl ${message.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-600'}`}>
+            {message.text}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-8">
+          {/* Form fields theo từng tab */}
+          {(activeTab === 'TRANSFER' || activeTab === 'WITHDRAWAL') && (
+            <div>
+              <label className="block font-bold mb-2 text-[#14213d]">Tài khoản khách hàng</label>
+              <input
+                type="text"
+                value={activeTab === 'TRANSFER' ? fromAccountId : fromAccountId}
+                onChange={(e) => activeTab === 'TRANSFER' ? setFromAccountId(e.target.value) : setFromAccountId(e.target.value)}
+                placeholder="UUID tài khoản khách"
+                className="w-full p-4 border rounded-2xl focus:ring-2 focus:ring-[#fca311]"
+                required
+              />
+            </div>
+          )}
+
+          {activeTab === 'TRANSFER' && (
+            <div>
+              <label className="block font-bold mb-2 text-[#14213d]">Tài khoản nhận</label>
+              <input type="text" value={toAccountId} onChange={(e) => setToAccountId(e.target.value)} placeholder="UUID tài khoản nhận" className="w-full p-4 border rounded-2xl focus:ring-2 focus:ring-[#fca311]" required />
+            </div>
+          )}
+
+          {(activeTab === 'DEPOSIT' || activeTab === 'WITHDRAWAL') && (
+            <div>
+              <label className="block font-bold mb-2 text-[#14213d]">Tài khoản Vault (Két sắt)</label>
+              <input type="text" value={vaultAccountId} onChange={(e) => setVaultAccountId(e.target.value)} placeholder="UUID Vault" className="w-full p-4 border rounded-2xl focus:ring-2 focus:ring-[#fca311]" required />
+            </div>
+          )}
+
+          <div>
+            <label className="block font-bold mb-2 text-[#14213d]">Số tiền</label>
+            <input
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              placeholder="Nhập số tiền"
+              className="w-full p-4 border rounded-2xl text-2xl focus:ring-2 focus:ring-[#fca311]"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-5 bg-[#14213d] text-white rounded-2xl font-bold text-xl hover:bg-black transition"
+          >
+            {loading ? 'Đang tạo lệnh...' : `Tạo lệnh ${activeTab === 'TRANSFER' ? 'Chuyển tiền' : activeTab === 'DEPOSIT' ? 'Nạp tiền' : 'Rút tiền'}`}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/globals.css">
+@import "tailwindcss";
+
+/* 1. KHAI BÁO BỘ MÀU & FONT CỦA RIÊNG BẠN VÀO TAILWIND */
+@theme {
+  --color-navy: #14213d;
+  --color-gold: #fca311;
+  --color-light-bg: #e5e5e5;
+  --color-pure-white: #ffffff;
+  --color-pure-black: #000000;
+
+  --font-logo: var(--font-logo), cursive;
+  --font-heading: var(--font-heading), serif;
+  --font-body: var(--font-body), sans-serif;
+}
+
+/* 2. MAPPING MÀU VỚI CÁC COMPONENT CỦA SHADCN UI */
+@layer base {
+  :root {
+    /* Shadcn UI sử dụng hệ màu HSL để dễ tính toán độ mờ (opacity) */
+    /* Mình đã chuyển đổi các mã HEX của bạn sang HSL tương ứng */
+    
+    --background: 0 0% 90%; /* #e5e5e5 - Nền app */
+    --foreground: 0 0% 0%;  /* #000000 - Chữ tổng thể */
+
+    --card: 0 0% 100%; /* #ffffff - Nền của các khối Card/Table */
+    --card-foreground: 0 0% 0%;
+
+    --primary: 221 51% 15%; /* #14213d (Navy) - Màu Nút bấm chính */
+    --primary-foreground: 0 0% 100%; /* Chữ trên nút màu trắng */
+
+    --secondary: 37 98% 53%; /* #fca311 (Gold) - Nút phụ / Điểm nhấn */
+    --secondary-foreground: 221 51% 15%; /* Chữ màu Navy trên nền Gold */
+
+    --muted: 0 0% 85%;
+    --muted-foreground: 0 0% 40%;
+
+    --border: 0 0% 80%; /* Viền nhạt */
+    --input: 0 0% 80%;  /* Viền form nhập liệu */
+    --ring: 37 98% 53%; /* Màu viền phát sáng khi click vào Input (Màu Gold) */
+    
+    --radius: 0.5rem; /* Độ bo góc chuẩn của app ngân hàng */
+  }
+
+  /* 3. ÉP FONT CHỮ TOÀN CỤC */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--color-navy); /* Tiêu đề mặc định có màu Navy uy tín */
+  }
+}
+</file>
+
+<file path="src/app/layout.tsx">
+import type { Metadata } from "next";
+import { Great_Vibes, Merriweather, Source_Sans_3 } from "next/font/google";
+import "./globals.css";
+
+// 1. Cấu hình Font Logo (Great Vibes)
+const greatVibes = Great_Vibes({ 
+  weight: "400", 
+  subsets: ["latin"], 
+  variable: "--font-logo" 
+});
+
+// 2. Cấu hình Font Tiêu đề (Merriweather)
+const merriweather = Merriweather({ 
+  weight: ["300", "400", "700", "900"], 
+  subsets: ["latin", "vietnamese"], 
+  variable: "--font-heading" 
+});
+
+// 3. Cấu hình Font Nội dung (Source Sans 3 - Bản nâng cấp của Source Sans Pro)
+const sourceSans = Source_Sans_3({ 
+  subsets: ["latin", "vietnamese"], 
+  variable: "--font-body" 
+});
+
+export const metadata: Metadata = {
+  title: "Aurora Core Banking",
+  description: "Hệ thống quản lý ngân hàng lõi",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="vi" suppressHydrationWarning>
+      <body
+        className={`${greatVibes.variable} ${merriweather.variable} ${sourceSans.variable} font-body bg-lightBg text-pureBlack antialiased min-h-screen`}
+      >
+        {children}
+      </body>
+    </html>
+  );
+}
+</file>
+
+<file path="src/app/register/page.tsx">
+"use client";
+
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
+export default function RegisterPage() {
+  const router = useRouter();
+
+  const [formData, setFormData] = useState({
+    email: '',
+    fullName: '',
+    password: '',
+    phone: '',
+    age: '',
+    gender: '',
+    education: '',
+    income: '',
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    try {
+      const res = await fetch('http://localhost:3001/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: formData.email,
+          fullName: formData.fullName,
+          password: formData.password,
+          // Các field demographics sẽ được lưu vào CustomerProfile
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.message || 'Đăng ký thất bại');
+
+      alert('Đăng ký tài khoản thành công! Vui lòng đăng nhập để tiếp tục.');
+      router.push('/login');
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-[#e5e5e5] py-12">
+      <div className="w-full max-w-2xl bg-white rounded-3xl shadow-xl p-12">
+        <div className="text-center mb-10">
+          <h1 className="font-logo text-6xl text-[#14213d]">Aurora</h1>
+          <h2 className="font-heading text-3xl mt-6 text-[#14213d]">Mở tài khoản cá nhân</h2>
+          <p className="text-gray-600 mt-3">Vui lòng điền đầy đủ thông tin</p>
+        </div>
+
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-600 p-4 rounded-2xl mb-8 text-center">
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block font-bold text-[#14213d] mb-2">Họ và tên <span className="text-red-500">*</span></label>
+              <input
+                type="text"
+                name="fullName"
+                value={formData.fullName}
+                onChange={handleChange}
+                className="w-full px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#fca311]"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block font-bold text-[#14213d] mb-2">Email <span className="text-red-500">*</span></label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#fca311]"
+                required
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block font-bold text-[#14213d] mb-2">Số điện thoại</label>
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="0123456789"
+              className="w-full px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#fca311]"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label className="block font-bold text-[#14213d] mb-2">Tuổi</label>
+              <input
+                type="number"
+                name="age"
+                value={formData.age}
+                onChange={handleChange}
+                className="w-full px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#fca311]"
+              />
+            </div>
+
+            <div>
+              <label className="block font-bold text-[#14213d] mb-2">Giới tính</label>
+              <select
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+                className="w-full px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#fca311]"
+              >
+                <option value="">Chọn giới tính</option>
+                <option value="Male">Nam</option>
+                <option value="Female">Nữ</option>
+                <option value="Other">Khác</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block font-bold text-[#14213d] mb-2">Thu nhập (VND/tháng)</label>
+              <input
+                type="number"
+                name="income"
+                value={formData.income}
+                onChange={handleChange}
+                className="w-full px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#fca311]"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block font-bold text-[#14213d] mb-2">Mật khẩu <span className="text-red-500">*</span></label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              className="w-full px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#fca311]"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-5 bg-[#14213d] text-white font-heading text-xl rounded-2xl hover:bg-black transition disabled:opacity-70"
+          >
+            {loading ? 'Đang tạo tài khoản...' : 'Mở tài khoản Aurora'}
+          </button>
+        </form>
+
+        <p className="text-center mt-8 text-gray-600">
+          Đã có tài khoản?{' '}
+          <Link href="/login" className="text-[#fca311] font-bold hover:underline">
+            Đăng nhập ngay
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
+}
+</file>
+
+<file path="src/app/transaction/pending/page.tsx">
+
+</file>
+
+<file path="src/components/OverviewChart.tsx">
+"use client";
+
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+
+// Dữ liệu giả lập dòng tiền 7 ngày
+const chartData = [
+  { day: "Thứ 2", inflow: 12500, outflow: 8000 },
+  { day: "Thứ 3", inflow: 15000, outflow: 11000 },
+  { day: "Thứ 4", inflow: 9000, outflow: 14000 },
+  { day: "Thứ 5", inflow: 22000, outflow: 9500 },
+  { day: "Thứ 6", inflow: 18000, outflow: 12000 },
+  { day: "Thứ 7", inflow: 5000, outflow: 3000 },
+  { day: "CN", inflow: 4500, outflow: 2000 },
+];
+
+// Cấu hình màu sắc và nhãn (Sử dụng hệ màu chuẩn của shadcn)
+const chartConfig = {
+  inflow: {
+    label: "Tiền vào (VND)",
+    color: "hsl(var(--chart-1))", 
+  },
+  outflow: {
+    label: "Tiền ra (VND)",
+    color: "hsl(var(--chart-2))",
+  },
+} satisfies ChartConfig;
+
+export function OverviewChart() {
+  return (
+    <Card className="col-span-4">
+      <CardHeader>
+        <CardTitle className="font-heading text-xl">Lưu chuyển tiền tệ</CardTitle>
+        <CardDescription>
+          Biểu đồ so sánh Tiền vào và Tiền ra trong 7 ngày gần nhất.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="pl-2">
+        <ChartContainer config={chartConfig} className="min-h-[300px] w-full">
+          <BarChart accessibilityLayer data={chartData}>
+            <CartesianGrid vertical={false} strokeDasharray="3 3" />
+            <XAxis
+              dataKey="day"
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+              className="font-sans text-xs"
+            />
+            <YAxis 
+              tickLine={false}
+              axisLine={false}
+              tickMargin={10}
+              className="font-mono text-xs"
+              tickFormatter={(value) => `$${value}`}
+            />
+            <ChartTooltip content={<ChartTooltipContent />} />
+            <Bar dataKey="inflow" fill="var(--color-inflow)" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="outflow" fill="var(--color-outflow)" radius={[4, 4, 0, 0]} />
+          </BarChart>
+        </ChartContainer>
+      </CardContent>
+    </Card>
+  );
+}
+</file>
+
+<file path="src/components/Sidebar.tsx">
+import Link from "next/link";
+import { LayoutDashboard, ArrowRightLeft, Users, Settings, ShieldCheck } from "lucide-react";
+
+export function Sidebar() {
+  return (
+    <aside className="w-64 border-r bg-card min-h-screen flex flex-col">
+      {/* Logo / Tên hệ thống */}
+      <div className="h-16 flex items-center px-6 border-b">
+        <h2 className="font-heading text-2xl font-bold tracking-tight text-primary">
+          V-Bank
+        </h2>
+      </div>
+      
+      {/* Menu Điều hướng */}
+      <nav className="flex-1 p-4 space-y-2 font-sans">
+        <Link 
+          href="/" 
+          className="flex items-center gap-3 px-3 py-2 rounded-md bg-secondary text-secondary-foreground font-medium transition-colors"
+        >
+          <LayoutDashboard className="h-4 w-4" />
+          Tổng quan
+        </Link>
+        <Link 
+          href="/transactions" 
+          className="flex items-center gap-3 px-3 py-2 rounded-md text-muted-foreground hover:bg-secondary hover:text-secondary-foreground transition-colors"
+        >
+          <ArrowRightLeft className="h-4 w-4" />
+          Giao dịch
+        </Link>
+        <Link 
+          href="/customers" 
+          className="flex items-center gap-3 px-3 py-2 rounded-md text-muted-foreground hover:bg-secondary hover:text-secondary-foreground transition-colors"
+        >
+          <Users className="h-4 w-4" />
+          Khách hàng
+        </Link>
+        
+        {/* MỚI THÊM: Menu Đối soát */}
+        <Link 
+          href="/reconciliation" 
+          className="flex items-center gap-3 px-3 py-2 rounded-md text-muted-foreground hover:bg-secondary hover:text-secondary-foreground transition-colors"
+        >
+          <ShieldCheck className="h-4 w-4" />
+          Đối soát
+        </Link>
+      </nav>
+
+      {/* Cài đặt ở cuối */}
+      <div className="p-4 border-t">
+        <Link 
+          href="/settings" 
+          className="flex items-center gap-3 px-3 py-2 rounded-md text-muted-foreground hover:bg-secondary hover:text-secondary-foreground transition-colors font-sans"
+        >
+          <Settings className="h-4 w-4" />
+          Cài đặt
+        </Link>
+      </div>
+    </aside>
+  );
+}
+</file>
+
+<file path="src/components/ui/alert.tsx">
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+
+import { cn } from "@/lib/utils"
+
+const alertVariants = cva(
+  "group/alert relative grid w-full gap-0.5 rounded-lg border px-2.5 py-2 text-left text-sm has-data-[slot=alert-action]:relative has-data-[slot=alert-action]:pr-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2 *:[svg]:row-span-2 *:[svg]:translate-y-0.5 *:[svg]:text-current *:[svg:not([class*='size-'])]:size-4",
+  {
+    variants: {
+      variant: {
+        default: "bg-card text-card-foreground",
+        destructive:
+          "bg-card text-destructive *:data-[slot=alert-description]:text-destructive/90 *:[svg]:text-current",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+)
+
+function Alert({
+  className,
+  variant,
+  ...props
+}: React.ComponentProps<"div"> & VariantProps<typeof alertVariants>) {
+  return (
+    <div
+      data-slot="alert"
+      role="alert"
+      className={cn(alertVariants({ variant }), className)}
+      {...props}
+    />
+  )
+}
+
+function AlertTitle({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="alert-title"
+      className={cn(
+        "font-medium group-has-[>svg]/alert:col-start-2 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function AlertDescription({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="alert-description"
+      className={cn(
+        "text-sm text-balance text-muted-foreground md:text-pretty [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function AlertAction({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="alert-action"
+      className={cn("absolute top-2 right-2", className)}
+      {...props}
+    />
+  )
+}
+
+export { Alert, AlertTitle, AlertDescription, AlertAction }
+</file>
+
+<file path="src/components/ui/badge.tsx">
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+import { Slot } from "radix-ui"
+
+import { cn } from "@/lib/utils"
+
+const badgeVariants = cva(
+  "group/badge inline-flex h-5 w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-4xl border border-transparent px-2 py-0.5 text-xs font-medium whitespace-nowrap transition-all focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&>svg]:pointer-events-none [&>svg]:size-3!",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
+        secondary:
+          "bg-secondary text-secondary-foreground [a]:hover:bg-secondary/80",
+        destructive:
+          "bg-destructive/10 text-destructive focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:focus-visible:ring-destructive/40 [a]:hover:bg-destructive/20",
+        outline:
+          "border-border text-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground",
+        ghost:
+          "hover:bg-muted hover:text-muted-foreground dark:hover:bg-muted/50",
+        link: "text-primary underline-offset-4 hover:underline",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+)
+
+function Badge({
+  className,
+  variant = "default",
+  asChild = false,
+  ...props
+}: React.ComponentProps<"span"> &
+  VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
+  const Comp = asChild ? Slot.Root : "span"
+
+  return (
+    <Comp
+      data-slot="badge"
+      data-variant={variant}
+      className={cn(badgeVariants({ variant }), className)}
+      {...props}
+    />
+  )
+}
+
+export { Badge, badgeVariants }
+</file>
+
+<file path="src/components/ui/button.tsx">
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+import { Slot } from "radix-ui"
+
+import { cn } from "@/lib/utils"
+
+const buttonVariants = cva(
+  "group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
+        outline:
+          "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
+        secondary:
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+        ghost:
+          "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
+        destructive:
+          "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
+        link: "text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default:
+          "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+        xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
+        sm: "h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
+        lg: "h-9 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+        icon: "size-8",
+        "icon-xs":
+          "size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
+        "icon-sm":
+          "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
+        "icon-lg": "size-9",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+)
+
+function Button({
+  className,
+  variant = "default",
+  size = "default",
+  asChild = false,
+  ...props
+}: React.ComponentProps<"button"> &
+  VariantProps<typeof buttonVariants> & {
+    asChild?: boolean
+  }) {
+  const Comp = asChild ? Slot.Root : "button"
+
+  return (
+    <Comp
+      data-slot="button"
+      data-variant={variant}
+      data-size={size}
+      className={cn(buttonVariants({ variant, size, className }))}
+      {...props}
+    />
+  )
+}
+
+export { Button, buttonVariants }
+</file>
+
+<file path="src/components/ui/card.tsx">
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
+
+function Card({
+  className,
+  size = "default",
+  ...props
+}: React.ComponentProps<"div"> & { size?: "default" | "sm" }) {
+  return (
+    <div
+      data-slot="card"
+      data-size={size}
+      className={cn(
+        "group/card flex flex-col gap-4 overflow-hidden rounded-xl bg-card py-4 text-sm text-card-foreground ring-1 ring-foreground/10 has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:gap-3 data-[size=sm]:py-3 data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-header"
+      className={cn(
+        "group/card-header @container/card-header grid auto-rows-min items-start gap-1 rounded-t-xl px-4 group-data-[size=sm]/card:px-3 has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-4 group-data-[size=sm]/card:[.border-b]:pb-3",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-title"
+      className={cn(
+        "font-heading text-base leading-snug font-medium group-data-[size=sm]/card:text-sm",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-description"
+      className={cn("text-sm text-muted-foreground", className)}
+      {...props}
+    />
+  )
+}
+
+function CardAction({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-action"
+      className={cn(
+        "col-start-2 row-span-2 row-start-1 self-start justify-self-end",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function CardContent({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-content"
+      className={cn("px-4 group-data-[size=sm]/card:px-3", className)}
+      {...props}
+    />
+  )
+}
+
+function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card-footer"
+      className={cn(
+        "flex items-center rounded-b-xl border-t bg-muted/50 p-4 group-data-[size=sm]/card:p-3",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardAction,
+  CardDescription,
+  CardContent,
+}
+</file>
+
+<file path="src/components/ui/chart.tsx">
+"use client"
+
+import * as React from "react"
+import * as RechartsPrimitive from "recharts"
+import type { TooltipValueType } from "recharts"
+
+import { cn } from "@/lib/utils"
+
+// Format: { THEME_NAME: CSS_SELECTOR }
+const THEMES = { light: "", dark: ".dark" } as const
+
+const INITIAL_DIMENSION = { width: 320, height: 200 } as const
+type TooltipNameType = number | string
+
+export type ChartConfig = Record<
+  string,
+  {
+    label?: React.ReactNode
+    icon?: React.ComponentType
+  } & (
+    | { color?: string; theme?: never }
+    | { color?: never; theme: Record<keyof typeof THEMES, string> }
+  )
+>
+
+type ChartContextProps = {
+  config: ChartConfig
+}
+
+const ChartContext = React.createContext<ChartContextProps | null>(null)
+
+function useChart() {
+  const context = React.useContext(ChartContext)
+
+  if (!context) {
+    throw new Error("useChart must be used within a <ChartContainer />")
+  }
+
+  return context
+}
+
+function ChartContainer({
+  id,
+  className,
+  children,
+  config,
+  initialDimension = INITIAL_DIMENSION,
+  ...props
+}: React.ComponentProps<"div"> & {
+  config: ChartConfig
+  children: React.ComponentProps<
+    typeof RechartsPrimitive.ResponsiveContainer
+  >["children"]
+  initialDimension?: {
+    width: number
+    height: number
+  }
+}) {
+  const uniqueId = React.useId()
+  const chartId = `chart-${id ?? uniqueId.replace(/:/g, "")}`
+
+  return (
+    <ChartContext.Provider value={{ config }}>
+      <div
+        data-slot="chart"
+        data-chart={chartId}
+        className={cn(
+          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden",
+          className
+        )}
+        {...props}
+      >
+        <ChartStyle id={chartId} config={config} />
+        <RechartsPrimitive.ResponsiveContainer
+          initialDimension={initialDimension}
+        >
+          {children}
+        </RechartsPrimitive.ResponsiveContainer>
+      </div>
+    </ChartContext.Provider>
+  )
+}
+
+const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
+  const colorConfig = Object.entries(config).filter(
+    ([, config]) => config.theme ?? config.color
+  )
+
+  if (!colorConfig.length) {
+    return null
+  }
+
+  return (
+    <style
+      dangerouslySetInnerHTML={{
+        __html: Object.entries(THEMES)
+          .map(
+            ([theme, prefix]) => `
+${prefix} [data-chart=${id}] {
+${colorConfig
+  .map(([key, itemConfig]) => {
+    const color =
+      itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ??
+      itemConfig.color
+    return color ? `  --color-${key}: ${color};` : null
+  })
+  .join("\n")}
+}
+`
+          )
+          .join("\n"),
+      }}
+    />
+  )
+}
+
+const ChartTooltip = RechartsPrimitive.Tooltip
+
+function ChartTooltipContent({
+  active,
+  payload,
+  className,
+  indicator = "dot",
+  hideLabel = false,
+  hideIndicator = false,
+  label,
+  labelFormatter,
+  labelClassName,
+  formatter,
+  color,
+  nameKey,
+  labelKey,
+}: React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
+  React.ComponentProps<"div"> & {
+    hideLabel?: boolean
+    hideIndicator?: boolean
+    indicator?: "line" | "dot" | "dashed"
+    nameKey?: string
+    labelKey?: string
+  } & Omit<
+    RechartsPrimitive.DefaultTooltipContentProps<
+      TooltipValueType,
+      TooltipNameType
+    >,
+    "accessibilityLayer"
+  >) {
+  const { config } = useChart()
+
+  const tooltipLabel = React.useMemo(() => {
+    if (hideLabel || !payload?.length) {
+      return null
+    }
+
+    const [item] = payload
+    const key = `${labelKey ?? item?.dataKey ?? item?.name ?? "value"}`
+    const itemConfig = getPayloadConfigFromPayload(config, item, key)
+    const value =
+      !labelKey && typeof label === "string"
+        ? (config[label]?.label ?? label)
+        : itemConfig?.label
+
+    if (labelFormatter) {
+      return (
+        <div className={cn("font-medium", labelClassName)}>
+          {labelFormatter(value, payload)}
+        </div>
+      )
+    }
+
+    if (!value) {
+      return null
+    }
+
+    return <div className={cn("font-medium", labelClassName)}>{value}</div>
+  }, [
+    label,
+    labelFormatter,
+    payload,
+    hideLabel,
+    labelClassName,
+    config,
+    labelKey,
+  ])
+
+  if (!active || !payload?.length) {
+    return null
+  }
+
+  const nestLabel = payload.length === 1 && indicator !== "dot"
+
+  return (
+    <div
+      className={cn(
+        "grid min-w-32 items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl",
+        className
+      )}
+    >
+      {!nestLabel ? tooltipLabel : null}
+      <div className="grid gap-1.5">
+        {payload
+          .filter((item) => item.type !== "none")
+          .map((item, index) => {
+            const key = `${nameKey ?? item.name ?? item.dataKey ?? "value"}`
+            const itemConfig = getPayloadConfigFromPayload(config, item, key)
+            const indicatorColor = color ?? item.payload?.fill ?? item.color
+
+            return (
+              <div
+                key={index}
+                className={cn(
+                  "flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground",
+                  indicator === "dot" && "items-center"
+                )}
+              >
+                {formatter && item?.value !== undefined && item.name ? (
+                  formatter(item.value, item.name, item, index, item.payload)
+                ) : (
+                  <>
+                    {itemConfig?.icon ? (
+                      <itemConfig.icon />
+                    ) : (
+                      !hideIndicator && (
+                        <div
+                          className={cn(
+                            "shrink-0 rounded-[2px] border-(--color-border) bg-(--color-bg)",
+                            {
+                              "h-2.5 w-2.5": indicator === "dot",
+                              "w-1": indicator === "line",
+                              "w-0 border-[1.5px] border-dashed bg-transparent":
+                                indicator === "dashed",
+                              "my-0.5": nestLabel && indicator === "dashed",
+                            }
+                          )}
+                          style={
+                            {
+                              "--color-bg": indicatorColor,
+                              "--color-border": indicatorColor,
+                            } as React.CSSProperties
+                          }
+                        />
+                      )
+                    )}
+                    <div
+                      className={cn(
+                        "flex flex-1 justify-between leading-none",
+                        nestLabel ? "items-end" : "items-center"
+                      )}
+                    >
+                      <div className="grid gap-1.5">
+                        {nestLabel ? tooltipLabel : null}
+                        <span className="text-muted-foreground">
+                          {itemConfig?.label ?? item.name}
+                        </span>
+                      </div>
+                      {item.value != null && (
+                        <span className="font-mono font-medium text-foreground tabular-nums">
+                          {typeof item.value === "number"
+                            ? item.value.toLocaleString()
+                            : String(item.value)}
+                        </span>
+                      )}
+                    </div>
+                  </>
+                )}
+              </div>
+            )
+          })}
+      </div>
+    </div>
+  )
+}
+
+const ChartLegend = RechartsPrimitive.Legend
+
+function ChartLegendContent({
+  className,
+  hideIcon = false,
+  payload,
+  verticalAlign = "bottom",
+  nameKey,
+}: React.ComponentProps<"div"> & {
+  hideIcon?: boolean
+  nameKey?: string
+} & RechartsPrimitive.DefaultLegendContentProps) {
+  const { config } = useChart()
+
+  if (!payload?.length) {
+    return null
+  }
+
+  return (
+    <div
+      className={cn(
+        "flex items-center justify-center gap-4",
+        verticalAlign === "top" ? "pb-3" : "pt-3",
+        className
+      )}
+    >
+      {payload
+        .filter((item) => item.type !== "none")
+        .map((item, index) => {
+          const key = `${nameKey ?? item.dataKey ?? "value"}`
+          const itemConfig = getPayloadConfigFromPayload(config, item, key)
+
+          return (
+            <div
+              key={index}
+              className={cn(
+                "flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground"
+              )}
+            >
+              {itemConfig?.icon && !hideIcon ? (
+                <itemConfig.icon />
+              ) : (
+                <div
+                  className="h-2 w-2 shrink-0 rounded-[2px]"
+                  style={{
+                    backgroundColor: item.color,
+                  }}
+                />
+              )}
+              {itemConfig?.label}
+            </div>
+          )
+        })}
+    </div>
+  )
+}
+
+function getPayloadConfigFromPayload(
+  config: ChartConfig,
+  payload: unknown,
+  key: string
+) {
+  if (typeof payload !== "object" || payload === null) {
+    return undefined
+  }
+
+  const payloadPayload =
+    "payload" in payload &&
+    typeof payload.payload === "object" &&
+    payload.payload !== null
+      ? payload.payload
+      : undefined
+
+  let configLabelKey: string = key
+
+  if (
+    key in payload &&
+    typeof payload[key as keyof typeof payload] === "string"
+  ) {
+    configLabelKey = payload[key as keyof typeof payload] as string
+  } else if (
+    payloadPayload &&
+    key in payloadPayload &&
+    typeof payloadPayload[key as keyof typeof payloadPayload] === "string"
+  ) {
+    configLabelKey = payloadPayload[
+      key as keyof typeof payloadPayload
+    ] as string
+  }
+
+  return configLabelKey in config ? config[configLabelKey] : config[key]
+}
+
+export {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  ChartLegend,
+  ChartLegendContent,
+  ChartStyle,
+}
+</file>
+
+<file path="src/components/ui/input.tsx">
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
+
+function Input({ className, type, ...props }: React.ComponentProps<"input">) {
+  return (
+    <input
+      type={type}
+      data-slot="input"
+      className={cn(
+        "h-8 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export { Input }
+</file>
+
+<file path="src/components/ui/label.tsx">
+"use client"
+
+import * as React from "react"
+import { Label as LabelPrimitive } from "radix-ui"
+
+import { cn } from "@/lib/utils"
+
+function Label({
+  className,
+  ...props
+}: React.ComponentProps<typeof LabelPrimitive.Root>) {
+  return (
+    <LabelPrimitive.Root
+      data-slot="label"
+      className={cn(
+        "flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+export { Label }
+</file>
+
+<file path="src/components/ui/progress.tsx">
+"use client"
+
+import * as React from "react"
+import { Progress as ProgressPrimitive } from "radix-ui"
+
+import { cn } from "@/lib/utils"
+
+function Progress({
+  className,
+  value,
+  ...props
+}: React.ComponentProps<typeof ProgressPrimitive.Root>) {
+  return (
+    <ProgressPrimitive.Root
+      data-slot="progress"
+      className={cn(
+        "relative flex h-1 w-full items-center overflow-x-hidden rounded-full bg-muted",
+        className
+      )}
+      {...props}
+    >
+      <ProgressPrimitive.Indicator
+        data-slot="progress-indicator"
+        className="size-full flex-1 bg-primary transition-all"
+        style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
+      />
+    </ProgressPrimitive.Root>
+  )
+}
+
+export { Progress }
+</file>
+
+<file path="src/components/ui/select.tsx">
+"use client"
+
+import * as React from "react"
+import { Select as SelectPrimitive } from "radix-ui"
+
+import { cn } from "@/lib/utils"
+import { ChevronDownIcon, CheckIcon, ChevronUpIcon } from "lucide-react"
+
+function Select({
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Root>) {
+  return <SelectPrimitive.Root data-slot="select" {...props} />
+}
+
+function SelectGroup({
+  className,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Group>) {
+  return (
+    <SelectPrimitive.Group
+      data-slot="select-group"
+      className={cn("scroll-my-1 p-1", className)}
+      {...props}
+    />
+  )
+}
+
+function SelectValue({
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Value>) {
+  return <SelectPrimitive.Value data-slot="select-value" {...props} />
+}
+
+function SelectTrigger({
+  className,
+  size = "default",
+  children,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
+  size?: "sm" | "default"
+}) {
+  return (
+    <SelectPrimitive.Trigger
+      data-slot="select-trigger"
+      data-size={size}
+      className={cn(
+        "flex w-fit items-center justify-between gap-1.5 rounded-lg border border-input bg-transparent py-2 pr-2 pl-2.5 text-sm whitespace-nowrap transition-colors outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 data-placeholder:text-muted-foreground data-[size=default]:h-8 data-[size=sm]:h-7 data-[size=sm]:rounded-[min(var(--radius-md),10px)] *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 dark:bg-input/30 dark:hover:bg-input/50 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className
+      )}
+      {...props}
+    >
+      {children}
+      <SelectPrimitive.Icon asChild>
+        <ChevronDownIcon className="pointer-events-none size-4 text-muted-foreground" />
+      </SelectPrimitive.Icon>
+    </SelectPrimitive.Trigger>
+  )
+}
+
+function SelectContent({
+  className,
+  children,
+  position = "item-aligned",
+  align = "center",
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Content>) {
+  return (
+    <SelectPrimitive.Portal>
+      <SelectPrimitive.Content
+        data-slot="select-content"
+        data-align-trigger={position === "item-aligned"}
+        className={cn("relative z-50 max-h-(--radix-select-content-available-height) min-w-36 origin-(--radix-select-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-lg bg-popover text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100 data-[align-trigger=true]:animate-none data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95", position ==="popper"&&"data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1", className )}
+        position={position}
+        align={align}
+        {...props}
+      >
+        <SelectScrollUpButton />
+        <SelectPrimitive.Viewport
+          data-position={position}
+          className={cn(
+            "data-[position=popper]:h-(--radix-select-trigger-height) data-[position=popper]:w-full data-[position=popper]:min-w-(--radix-select-trigger-width)",
+            position === "popper" && ""
+          )}
+        >
+          {children}
+        </SelectPrimitive.Viewport>
+        <SelectScrollDownButton />
+      </SelectPrimitive.Content>
+    </SelectPrimitive.Portal>
+  )
+}
+
+function SelectLabel({
+  className,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Label>) {
+  return (
+    <SelectPrimitive.Label
+      data-slot="select-label"
+      className={cn("px-1.5 py-1 text-xs text-muted-foreground", className)}
+      {...props}
+    />
+  )
+}
+
+function SelectItem({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Item>) {
+  return (
+    <SelectPrimitive.Item
+      data-slot="select-item"
+      className={cn(
+        "relative flex w-full cursor-default items-center gap-1.5 rounded-md py-1 pr-8 pl-1.5 text-sm outline-hidden select-none focus:bg-accent focus:text-accent-foreground not-data-[variant=destructive]:focus:**:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
+        className
+      )}
+      {...props}
+    >
+      <span className="pointer-events-none absolute right-2 flex size-4 items-center justify-center">
+        <SelectPrimitive.ItemIndicator>
+          <CheckIcon className="pointer-events-none" />
+        </SelectPrimitive.ItemIndicator>
+      </span>
+      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+    </SelectPrimitive.Item>
+  )
+}
+
+function SelectSeparator({
+  className,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Separator>) {
+  return (
+    <SelectPrimitive.Separator
+      data-slot="select-separator"
+      className={cn("pointer-events-none -mx-1 my-1 h-px bg-border", className)}
+      {...props}
+    />
+  )
+}
+
+function SelectScrollUpButton({
+  className,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>) {
+  return (
+    <SelectPrimitive.ScrollUpButton
+      data-slot="select-scroll-up-button"
+      className={cn(
+        "z-10 flex cursor-default items-center justify-center bg-popover py-1 [&_svg:not([class*='size-'])]:size-4",
+        className
+      )}
+      {...props}
+    >
+      <ChevronUpIcon
+      />
+    </SelectPrimitive.ScrollUpButton>
+  )
+}
+
+function SelectScrollDownButton({
+  className,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>) {
+  return (
+    <SelectPrimitive.ScrollDownButton
+      data-slot="select-scroll-down-button"
+      className={cn(
+        "z-10 flex cursor-default items-center justify-center bg-popover py-1 [&_svg:not([class*='size-'])]:size-4",
+        className
+      )}
+      {...props}
+    >
+      <ChevronDownIcon
+      />
+    </SelectPrimitive.ScrollDownButton>
+  )
+}
+
+export {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectScrollDownButton,
+  SelectScrollUpButton,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+}
+</file>
+
+<file path="src/components/ui/table.tsx">
+"use client"
+
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
+
+function Table({ className, ...props }: React.ComponentProps<"table">) {
+  return (
+    <div
+      data-slot="table-container"
+      className="relative w-full overflow-x-auto"
+    >
+      <table
+        data-slot="table"
+        className={cn("w-full caption-bottom text-sm", className)}
+        {...props}
+      />
+    </div>
+  )
+}
+
+function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
+  return (
+    <thead
+      data-slot="table-header"
+      className={cn("[&_tr]:border-b", className)}
+      {...props}
+    />
+  )
+}
+
+function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
+  return (
+    <tbody
+      data-slot="table-body"
+      className={cn("[&_tr:last-child]:border-0", className)}
+      {...props}
+    />
+  )
+}
+
+function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
+  return (
+    <tfoot
+      data-slot="table-footer"
+      className={cn(
+        "border-t bg-muted/50 font-medium [&>tr]:last:border-b-0",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
+  return (
+    <tr
+      data-slot="table-row"
+      className={cn(
+        "border-b transition-colors hover:bg-muted/50 has-aria-expanded:bg-muted/50 data-[state=selected]:bg-muted",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function TableHead({ className, ...props }: React.ComponentProps<"th">) {
+  return (
+    <th
+      data-slot="table-head"
+      className={cn(
+        "h-10 px-2 text-left align-middle font-medium whitespace-nowrap text-foreground [&:has([role=checkbox])]:pr-0",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function TableCell({ className, ...props }: React.ComponentProps<"td">) {
+  return (
+    <td
+      data-slot="table-cell"
+      className={cn(
+        "p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function TableCaption({
+  className,
+  ...props
+}: React.ComponentProps<"caption">) {
+  return (
+    <caption
+      data-slot="table-caption"
+      className={cn("mt-4 text-sm text-muted-foreground", className)}
+      {...props}
+    />
+  )
+}
+
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
+}
+</file>
+
+<file path="src/components/ui/tabs.tsx">
+"use client"
+
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+import { Tabs as TabsPrimitive } from "radix-ui"
+
+import { cn } from "@/lib/utils"
+
+function Tabs({
+  className,
+  orientation = "horizontal",
+  ...props
+}: React.ComponentProps<typeof TabsPrimitive.Root>) {
+  return (
+    <TabsPrimitive.Root
+      data-slot="tabs"
+      data-orientation={orientation}
+      className={cn(
+        "group/tabs flex gap-2 data-horizontal:flex-col",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+const tabsListVariants = cva(
+  "group/tabs-list inline-flex w-fit items-center justify-center rounded-lg p-[3px] text-muted-foreground group-data-horizontal/tabs:h-8 group-data-vertical/tabs:h-fit group-data-vertical/tabs:flex-col data-[variant=line]:rounded-none",
+  {
+    variants: {
+      variant: {
+        default: "bg-muted",
+        line: "gap-1 bg-transparent",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+)
+
+function TabsList({
+  className,
+  variant = "default",
+  ...props
+}: React.ComponentProps<typeof TabsPrimitive.List> &
+  VariantProps<typeof tabsListVariants>) {
+  return (
+    <TabsPrimitive.List
+      data-slot="tabs-list"
+      data-variant={variant}
+      className={cn(tabsListVariants({ variant }), className)}
+      {...props}
+    />
+  )
+}
+
+function TabsTrigger({
+  className,
+  ...props
+}: React.ComponentProps<typeof TabsPrimitive.Trigger>) {
+  return (
+    <TabsPrimitive.Trigger
+      data-slot="tabs-trigger"
+      className={cn(
+        "relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 py-0.5 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50 has-data-[icon=inline-end]:pr-1 has-data-[icon=inline-start]:pl-1 dark:text-muted-foreground dark:hover:text-foreground group-data-[variant=default]/tabs-list:data-active:shadow-sm group-data-[variant=line]/tabs-list:data-active:shadow-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent dark:group-data-[variant=line]/tabs-list:data-active:border-transparent dark:group-data-[variant=line]/tabs-list:data-active:bg-transparent",
+        "data-active:bg-background data-active:text-foreground dark:data-active:border-input dark:data-active:bg-input/30 dark:data-active:text-foreground",
+        "after:absolute after:bg-foreground after:opacity-0 after:transition-opacity group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:bottom-[-5px] group-data-horizontal/tabs:after:h-0.5 group-data-vertical/tabs:after:inset-y-0 group-data-vertical/tabs:after:-right-1 group-data-vertical/tabs:after:w-0.5 group-data-[variant=line]/tabs-list:data-active:after:opacity-100",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function TabsContent({
+  className,
+  ...props
+}: React.ComponentProps<typeof TabsPrimitive.Content>) {
+  return (
+    <TabsPrimitive.Content
+      data-slot="tabs-content"
+      className={cn("flex-1 text-sm outline-none", className)}
+      {...props}
+    />
+  )
+}
+
+export { Tabs, TabsList, TabsTrigger, TabsContent, tabsListVariants }
+</file>
+
+<file path="src/lib/utils.ts">
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+</file>
+
+<file path="tsconfig.json">
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "**/*.mts"
+  ],
+  "exclude": ["node_modules"]
+}
+</file>
+
+</files>

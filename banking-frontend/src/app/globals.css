@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+/* 1. KHAI BÁO BỘ MÀU & FONT CỦA RIÊNG BẠN VÀO TAILWIND */
+@theme {
+  --color-navy: #14213d;
+  --color-gold: #fca311;
+  --color-light-bg: #e5e5e5;
+  --color-pure-white: #ffffff;
+  --color-pure-black: #000000;
+
+  --font-logo: var(--font-logo), cursive;
+  --font-heading: var(--font-heading), serif;
+  --font-body: var(--font-body), sans-serif;
+}
+
+/* 2. MAPPING MÀU VỚI CÁC COMPONENT CỦA SHADCN UI */
+@layer base {
+  :root {
+    /* Shadcn UI sử dụng hệ màu HSL để dễ tính toán độ mờ (opacity) */
+    /* Mình đã chuyển đổi các mã HEX của bạn sang HSL tương ứng */
+    
+    --background: 0 0% 90%; /* #e5e5e5 - Nền app */
+    --foreground: 0 0% 0%;  /* #000000 - Chữ tổng thể */
+
+    --card: 0 0% 100%; /* #ffffff - Nền của các khối Card/Table */
+    --card-foreground: 0 0% 0%;
+
+    --primary: 221 51% 15%; /* #14213d (Navy) - Màu Nút bấm chính */
+    --primary-foreground: 0 0% 100%; /* Chữ trên nút màu trắng */
+
+    --secondary: 37 98% 53%; /* #fca311 (Gold) - Nút phụ / Điểm nhấn */
+    --secondary-foreground: 221 51% 15%; /* Chữ màu Navy trên nền Gold */
+
+    --muted: 0 0% 85%;
+    --muted-foreground: 0 0% 40%;
+
+    --border: 0 0% 80%; /* Viền nhạt */
+    --input: 0 0% 80%;  /* Viền form nhập liệu */
+    --ring: 37 98% 53%; /* Màu viền phát sáng khi click vào Input (Màu Gold) */
+    
+    --radius: 0.5rem; /* Độ bo góc chuẩn của app ngân hàng */
+  }
+
+  /* 3. ÉP FONT CHỮ TOÀN CỤC */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--color-navy); /* Tiêu đề mặc định có màu Navy uy tín */
+  }
+}

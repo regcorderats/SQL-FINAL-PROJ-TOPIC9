@@ -1,0 +1,3257 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.gitignore
+.prettierrc
+eslint.config.mjs
+nest-cli.json
+package.json
+prisma.config.ts
+prisma/migrations/20260507083232_init/migration.sql
+prisma/migrations/20260513063406_create_calculate_interest_udf/migration.sql
+prisma/migrations/20260513063925_add_customer_profile_audit/migration.sql
+prisma/migrations/20260513063933_create_profile_audit_trigger/migration.sql
+prisma/migrations/20260513064142_optimize_pending_transactions/migration.sql
+prisma/migrations/20260514201804_add_outbox_analytics_fields/migration.sql
+prisma/migrations/migration_lock.toml
+prisma/schema.prisma
+prisma/seed.ts
+README.md
+src/account-lifecycle/account-lifecycle.module.ts
+src/account-lifecycle/account-lifecycle.service.spec.ts
+src/account-lifecycle/account-lifecycle.service.ts
+src/app.controller.spec.ts
+src/app.controller.ts
+src/app.module.ts
+src/app.service.ts
+src/branches/branches.controller.spec.ts
+src/branches/branches.controller.ts
+src/branches/branches.module.ts
+src/branches/branches.service.spec.ts
+src/branches/branches.service.ts
+src/branches/dto/create-branch.dto.ts
+src/common/pagination.dto.ts
+src/employees/dto/create-employee.dto.ts
+src/employees/employees.controller.spec.ts
+src/employees/employees.controller.ts
+src/employees/employees.module.ts
+src/employees/employees.service.spec.ts
+src/employees/employees.service.ts
+src/filters/prisma-exception.filter.ts
+src/interceptors/idempotency/idempotency.interceptor.spec.ts
+src/interceptors/idempotency/idempotency.interceptor.ts
+src/interceptors/transform/transform.interceptor.spec.ts
+src/interceptors/transform/transform.interceptor.ts
+src/main.ts
+src/neo4j/neo4j.module.ts
+src/neo4j/neo4j.service.spec.ts
+src/neo4j/neo4j.service.ts
+src/outbox-processor/outbox-processor.module.ts
+src/outbox-processor/outbox-processor.service.spec.ts
+src/outbox-processor/outbox-processor.service.ts
+src/outbox-processor/utils.ts
+src/outbox/outbox.module.ts
+src/outbox/outbox.service.spec.ts
+src/outbox/outbox.service.ts
+src/prisma/prisma.module.ts
+src/prisma/prisma.service.spec.ts
+src/prisma/prisma.service.ts
+src/reconciliation/reconciliation.controller.spec.ts
+src/reconciliation/reconciliation.controller.ts
+src/reconciliation/reconciliation.module.ts
+src/reconciliation/reconciliation.service.spec.ts
+src/reconciliation/reconciliation.service.ts
+src/reports/dto/daily-report.dto.ts
+src/reports/reports.controller.spec.ts
+src/reports/reports.controller.ts
+src/reports/reports.cron.ts
+src/reports/reports.module.ts
+src/reports/reports.service.spec.ts
+src/reports/reports.service.ts
+src/transactions/transactions.controller.spec.ts
+src/transactions/transactions.controller.ts
+src/transactions/transactions.module.ts
+src/transactions/transactions.service.spec.ts
+src/transactions/transactions.service.ts
+src/users/dto/create-user.dto.ts
+src/users/users.controller.spec.ts
+src/users/users.controller.ts
+src/users/users.module.ts
+src/users/users.service.spec.ts
+src/users/users.service.ts
+test-api.http
+test/app.e2e-spec.ts
+test/jest-e2e.json
+tsconfig.build.json
+tsconfig.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".gitignore">
+# compiled output
+/dist
+/node_modules
+/build
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+
+# Tests
+/coverage
+/.nyc_output
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# temp directory
+.temp
+.tmp
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+</file>
+
+<file path=".prettierrc">
+{
+  "singleQuote": true,
+  "trailingComma": "all"
+}
+</file>
+
+<file path="eslint.config.mjs">
+// @ts-check
+import eslint from '@eslint/js';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
+
+export default tseslint.config(
+  {
+    ignores: ['eslint.config.mjs'],
+  },
+  eslint.configs.recommended,
+  ...tseslint.configs.recommendedTypeChecked,
+  eslintPluginPrettierRecommended,
+  {
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.jest,
+      },
+      sourceType: 'commonjs',
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  {
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-floating-promises': 'warn',
+      '@typescript-eslint/no-unsafe-argument': 'warn',
+      "prettier/prettier": ["error", { endOfLine: "auto" }],
+    },
+  },
+);
+</file>
+
+<file path="nest-cli.json">
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src",
+  "compilerOptions": {
+    "deleteOutDir": true
+  }
+}
+</file>
+
+<file path="package.json">
+{
+  "name": "banking-backend",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.0.1",
+    "@nestjs/config": "^4.0.4",
+    "@nestjs/core": "^11.0.1",
+    "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/schedule": "^6.1.3",
+    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/client": "^7.8.0",
+    "bcrypt": "^6.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
+    "neo4j-driver": "^6.0.1",
+    "pg": "^8.20.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.18.0",
+    "@faker-js/faker": "^10.4.0",
+    "@nestjs/cli": "^11.0.0",
+    "@nestjs/schematics": "^11.0.0",
+    "@nestjs/testing": "^11.0.1",
+    "@types/bcrypt": "^6.0.0",
+    "@types/cron": "^2.0.1",
+    "@types/express": "^5.0.0",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.0.0",
+    "@types/pg": "^8.20.0",
+    "@types/supertest": "^7.0.0",
+    "dotenv": "^17.4.2",
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.2",
+    "globals": "^17.0.0",
+    "jest": "^30.0.0",
+    "prettier": "^3.4.2",
+    "prisma": "^7.8.0",
+    "source-map-support": "^0.5.21",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.5",
+    "ts-loader": "^9.5.2",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.20.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  }
+}
+</file>
+
+<file path="prisma.config.ts">
+// This file was generated by Prisma, and assumes you have installed the following:
+// npm install --save-dev prisma dotenv
+import "dotenv/config";
+import { defineConfig } from "prisma/config";
+
+export default defineConfig({
+  schema: "prisma/schema.prisma",
+  migrations: {
+    path: "prisma/migrations",
+    seed: "ts-node prisma/seed.ts",
+  },
+  datasource: {
+    url: process.env["DATABASE_URL"],
+  },
+});
+</file>
+
+<file path="prisma/migrations/20260507083232_init/migration.sql">
+-- CreateEnum
+CREATE TYPE "Role" AS ENUM ('CUSTOMER', 'TELLER', 'MANAGER', 'AUDITOR');
+
+-- CreateEnum
+CREATE TYPE "TransactionStatus" AS ENUM ('PENDING', 'COMPLETED', 'FAILED');
+
+-- CreateTable
+CREATE TABLE "User" (
+    "id" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "role" "Role" NOT NULL DEFAULT 'CUSTOMER',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "CustomerProfile" (
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "age" INTEGER,
+    "gender" TEXT,
+    "education" TEXT,
+    "income" DECIMAL(15,2),
+
+    CONSTRAINT "CustomerProfile_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Branch" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "code" TEXT NOT NULL,
+    "location" TEXT,
+
+    CONSTRAINT "Branch_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Employee" (
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "branchId" TEXT NOT NULL,
+    "position" TEXT NOT NULL,
+
+    CONSTRAINT "Employee_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Account" (
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "balance" DECIMAL(15,2) NOT NULL DEFAULT 0.00,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Account_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Transaction" (
+    "id" TEXT NOT NULL,
+    "fromAccountId" TEXT,
+    "toAccountId" TEXT,
+    "amount" DECIMAL(15,2) NOT NULL,
+    "status" "TransactionStatus" NOT NULL DEFAULT 'PENDING',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Transaction_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "OutboxEvent" (
+    "id" TEXT NOT NULL,
+    "aggregateType" TEXT NOT NULL,
+    "aggregateId" TEXT NOT NULL,
+    "eventType" TEXT NOT NULL,
+    "payload" JSONB NOT NULL,
+    "isProcessed" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "OutboxEvent_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "LoanApplication" (
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "loanAmount" DECIMAL(15,2) NOT NULL,
+    "status" TEXT NOT NULL DEFAULT 'PENDING',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "LoanApplication_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "CustomerProfile_userId_key" ON "CustomerProfile"("userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Branch_code_key" ON "Branch"("code");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Employee_userId_key" ON "Employee"("userId");
+
+-- AddForeignKey
+ALTER TABLE "CustomerProfile" ADD CONSTRAINT "CustomerProfile_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Employee" ADD CONSTRAINT "Employee_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Employee" ADD CONSTRAINT "Employee_branchId_fkey" FOREIGN KEY ("branchId") REFERENCES "Branch"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Transaction" ADD CONSTRAINT "Transaction_fromAccountId_fkey" FOREIGN KEY ("fromAccountId") REFERENCES "Account"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Transaction" ADD CONSTRAINT "Transaction_toAccountId_fkey" FOREIGN KEY ("toAccountId") REFERENCES "Account"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "LoanApplication" ADD CONSTRAINT "LoanApplication_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+</file>
+
+<file path="prisma/migrations/20260513063406_create_calculate_interest_udf/migration.sql">
+/*
+  Warnings:
+
+  - Added the required column `type` to the `Transaction` table without a default value. This is not possible if the table is not empty.
+
+*/
+-- CreateEnum
+CREATE TYPE "TransactionType" AS ENUM ('DEPOSIT', 'WITHDRAWAL', 'TRANSFER');
+
+-- CreateEnum
+CREATE TYPE "AccountStatus" AS ENUM ('PENDING_KYC', 'ACTIVE', 'DORMANT', 'CLOSED');
+
+-- AlterEnum
+-- This migration adds more than one value to an enum.
+-- With PostgreSQL versions 11 and earlier, this is not possible
+-- in a single migration. This can be worked around by creating
+-- multiple migrations, each migration adding only one value to
+-- the enum.
+
+
+ALTER TYPE "TransactionStatus" ADD VALUE 'APPROVED';
+ALTER TYPE "TransactionStatus" ADD VALUE 'REJECTED';
+
+-- DropForeignKey
+ALTER TABLE "Account" DROP CONSTRAINT "Account_userId_fkey";
+
+-- AlterTable
+ALTER TABLE "Account" ADD COLUMN     "frozenBalance" DECIMAL(15,2) NOT NULL DEFAULT 0.00,
+ADD COLUMN     "isVault" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "status" "AccountStatus" NOT NULL DEFAULT 'PENDING_KYC',
+ALTER COLUMN "userId" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "Branch" ADD COLUMN     "deletedAt" TIMESTAMP(3),
+ADD COLUMN     "isActive" BOOLEAN NOT NULL DEFAULT true;
+
+-- AlterTable
+ALTER TABLE "Employee" ADD COLUMN     "deletedAt" TIMESTAMP(3),
+ADD COLUMN     "isActive" BOOLEAN NOT NULL DEFAULT true;
+
+-- AlterTable
+ALTER TABLE "Transaction" ADD COLUMN     "checkerId" TEXT,
+ADD COLUMN     "makerId" TEXT,
+ADD COLUMN     "type" "TransactionType" NOT NULL;
+
+-- AddForeignKey
+ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Transaction" ADD CONSTRAINT "Transaction_makerId_fkey" FOREIGN KEY ("makerId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Transaction" ADD CONSTRAINT "Transaction_checkerId_fkey" FOREIGN KEY ("checkerId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+DROP FUNCTION IF EXISTS calculate_daily_interest();
+
+-- Tạo User Defined Function (UDF)
+CREATE OR REPLACE FUNCTION calculate_daily_interest()
+RETURNS integer AS $$
+DECLARE
+    updated_rows integer;
+BEGIN
+    UPDATE "Account"
+    SET balance = balance + (balance * 0.005 / 365),
+        "updatedAt" = NOW()
+    WHERE status = 'ACTIVE' 
+      AND balance > 0 
+      AND "isVault" = false;
+    
+    GET DIAGNOSTICS updated_rows = ROW_COUNT;
+    
+    RETURN updated_rows;
+END;
+$$ LANGUAGE plpgsql;
+</file>
+
+<file path="prisma/migrations/20260513063925_add_customer_profile_audit/migration.sql">
+-- CreateTable
+CREATE TABLE "CustomerProfile_Audit" (
+    "id" TEXT NOT NULL,
+    "profileId" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "oldAge" INTEGER,
+    "oldGender" TEXT,
+    "oldEducation" TEXT,
+    "oldIncome" DECIMAL(15,2),
+    "changedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "CustomerProfile_Audit_pkey" PRIMARY KEY ("id")
+);
+</file>
+
+<file path="prisma/migrations/20260513063933_create_profile_audit_trigger/migration.sql">
+-- 1. Tạo Function xử lý logic copy dữ liệu
+CREATE OR REPLACE FUNCTION log_customer_profile_changes()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Mệnh đề IS DISTINCT FROM giúp bỏ qua các thao tác UPDATE không làm đổi giá trị (tránh rác DB)
+    IF OLD.age IS DISTINCT FROM NEW.age OR 
+       OLD.gender IS DISTINCT FROM NEW.gender OR 
+       OLD.education IS DISTINCT FROM NEW.education OR 
+       OLD.income IS DISTINCT FROM NEW.income THEN
+       
+       INSERT INTO "CustomerProfile_Audit" ("id", "profileId", "userId", "oldAge", "oldGender", "oldEducation", "oldIncome", "changedAt")
+       VALUES (
+           gen_random_uuid(), 
+           OLD.id, 
+           OLD."userId", 
+           OLD.age, 
+           OLD.gender, 
+           OLD.education, 
+           OLD.income, 
+           NOW()
+       );
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- 2. Gắn Trigger vào bảng CustomerProfile
+DROP TRIGGER IF EXISTS trg_customer_profile_audit ON "CustomerProfile";
+
+CREATE TRIGGER trg_customer_profile_audit
+AFTER UPDATE ON "CustomerProfile"
+FOR EACH ROW
+EXECUTE FUNCTION log_customer_profile_changes();
+</file>
+
+<file path="prisma/migrations/20260513064142_optimize_pending_transactions/migration.sql">
+-- ==========================================
+-- MỤC B.7: PARTIAL INDEX (CHỈ ĐÁNH INDEX DÒNG PENDING)
+-- ==========================================
+-- Khác với Index thường làm phình to DB, Partial Index chỉ đánh dấu những giao dịch
+-- có trạng thái PENDING. Vì số lượng lệnh chờ duyệt luôn ít hơn rất nhiều so với
+-- tổng lịch sử giao dịch, Index này siêu nhỏ và quét cực nhanh.
+CREATE INDEX IF NOT EXISTS idx_pending_tx ON "Transaction" (id) WHERE status = 'PENDING';
+
+-- ==========================================
+-- MỤC B.6: MATERIALIZED VIEW (GOM NHÓM DỮ LIỆU SẴN)
+-- ==========================================
+-- View này tính toán sẵn tổng số lượng và tổng tiền của các lệnh PENDING theo từng ngày.
+-- Khi màn hình Dashboard gọi API, DB chỉ cần đọc từ View này thay vì phải GROUP BY hàng triệu dòng Transaction.
+CREATE MATERIALIZED VIEW mv_pending_transactions_summary AS
+SELECT 
+    DATE("createdAt") as tx_date,
+    COUNT(*) as total_count,
+    SUM(amount) as total_amount
+FROM "Transaction"
+WHERE status = 'PENDING'
+GROUP BY DATE("createdAt");
+
+-- Tạo Unique Index cho View để sau này NestJS có thể gọi lệnh REFRESH CONCURRENTLY 
+-- (Làm mới view mà không khóa bảng)
+CREATE UNIQUE INDEX IF NOT EXISTS idx_mv_pending_tx_date ON mv_pending_transactions_summary (tx_date);
+</file>
+
+<file path="prisma/migrations/20260514201804_add_outbox_analytics_fields/migration.sql">
+/*
+  Warnings:
+
+  - Added the required column `fullName` to the `CustomerProfile` table without a default value. This is not possible if the table is not empty.
+
+*/
+-- AlterTable
+ALTER TABLE "CustomerProfile" ADD COLUMN     "fullName" TEXT NOT NULL;
+
+-- AlterTable
+ALTER TABLE "OutboxEvent" ADD COLUMN     "isAnalyticsProcessed" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "isFailed" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "retryCount" INTEGER NOT NULL DEFAULT 0;
+
+-- CreateTable
+CREATE TABLE "IdempotencyLog" (
+    "id" TEXT NOT NULL,
+    "key" TEXT NOT NULL,
+    "requestPath" TEXT NOT NULL,
+    "responseBody" JSONB NOT NULL,
+    "responseStatus" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "IdempotencyLog_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "IdempotencyLog_key_key" ON "IdempotencyLog"("key");
+
+-- CreateIndex
+CREATE INDEX "idx_idempotency_key" ON "IdempotencyLog"("key");
+
+-- CreateIndex
+CREATE INDEX "idx_outbox_aggregate_id" ON "OutboxEvent"("aggregateId");
+
+-- CreateIndex
+CREATE INDEX "idx_transaction_from_account_id" ON "Transaction"("fromAccountId");
+
+-- CreateIndex
+CREATE INDEX "idx_transaction_to_account_id" ON "Transaction"("toAccountId");
+</file>
+
+<file path="prisma/migrations/migration_lock.toml">
+# Please do not edit this file manually
+# It should be added in your version-control system (e.g., Git)
+provider = "postgresql"
+</file>
+
+<file path="prisma/schema.prisma">
+// This is your Prisma schema file
+
+generator client {
+  provider = "prisma-client-js" // Sửa lại thành prisma-client-js để dùng với NestJS
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ==========================================
+// THIẾT LẬP ENUM CHO PHÂN QUYỀN VÀ TRẠNG THÁI
+// ==========================================
+
+enum Role {
+  CUSTOMER
+  TELLER
+  MANAGER
+  AUDITOR
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  APPROVED
+  REJECTED
+  FAILED
+}
+
+enum TransactionType {
+  DEPOSIT
+  WITHDRAWAL
+  TRANSFER
+}
+
+enum AccountStatus {
+  PENDING_KYC
+  ACTIVE
+  DORMANT
+  CLOSED
+}
+
+// ==========================================
+// PHASE 1: CORE BANKING SCHEMA
+// ==========================================
+
+// 1. Users: CHỈ chứa Auth Data (Tuyệt đối không nhét Demographics)
+model User {
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+  role     Role   @default(CUSTOMER)
+
+  // Quan hệ (Relations)
+  profile          CustomerProfile?
+  accounts         Account[]
+  employeeRecord   Employee?
+  loanApplications LoanApplication[]
+
+  madeTransactions    Transaction[] @relation("MakerRelation")
+  checkedTransactions Transaction[] @relation("CheckerRelation")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// 2. Customer_Profiles: Chứa Demographics phục vụ HMDA sau này
+model CustomerProfile {
+  id        String @id @default(uuid())
+  userId    String @unique
+  user      User   @relation(fields: [userId], references: [id])
+
+  fullName  String   // <--- BẠN THÊM DÒNG NÀY VÀO ĐÂY NHÉ
+  age       Int?
+  gender    String?
+  education String?
+  income    Decimal? @db.Decimal(15, 2) // Thu nhập cũng quy về tiền
+}
+
+// 3. Branches: Quản lý chi nhánh
+model Branch {
+  id       String  @id @default(uuid())
+  name     String
+  code     String  @unique
+  location String?
+
+  isActive  Boolean   @default(true) // Soft delete
+  deletedAt DateTime? // Lưu thời điểm đóng cửa chi nhánh
+
+  employees Employee[]
+}
+
+// 4. Employees: Quản lý nhân sự
+model Employee {
+  id     String @id @default(uuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id])
+
+  branchId String
+  branch   Branch @relation(fields: [branchId], references: [id])
+
+  position  String
+  isActive  Boolean   @default(true) // Soft delete
+  deletedAt DateTime? // Lưu thời điểm nghỉ việc
+}
+
+// 5. Accounts: Quản lý số dư tài khoản
+model Account {
+  id     String  @id @default(uuid())
+  userId String? // Cho phép null nếu đây là tài khoản Vault (két sắt) của ngân hàng
+  user   User?   @relation(fields: [userId], references: [id])
+
+  // RULE: Tất cả tiền bạc phải dùng Decimal(15, 2)
+  balance       Decimal @default(0.00) @db.Decimal(15, 2)
+  frozenBalance Decimal @default(0.00) @db.Decimal(15, 2)
+
+  status  AccountStatus @default(PENDING_KYC) // Máy trạng thái tài khoản
+  isVault Boolean       @default(false) // Cờ nhận diện tài khoản Két sắt chi nhánh
+
+  transactionsFrom Transaction[] @relation("FromAccount")
+  transactionsTo   Transaction[] @relation("ToAccount")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ==========================================
+// BẢNG LƯU LỊCH SỬ BIẾN ĐỘNG DEMOGRAPHICS (MỤC B.5)
+// ==========================================
+model CustomerProfileAudit {
+  id            String   @id @default(uuid())
+  profileId     String
+  userId        String
+  
+  // Lưu lại các giá trị CŨ trước khi bị thay đổi
+  oldAge        Int?
+  oldGender     String?
+  oldEducation  String?
+  oldIncome     Decimal? @db.Decimal(15, 2)
+  
+  changedAt     DateTime @default(now())
+
+  @@map("CustomerProfile_Audit") // Ép tên bảng dưới DB để query cho chuẩn
+}
+
+// 6. Transactions: Lịch sử giao dịch
+model Transaction {
+  id String @id @default(uuid())
+
+  fromAccountId String? // Cho phép null nếu nạp tiền mặt tại quầy
+  fromAccount   Account? @relation("FromAccount", fields: [fromAccountId], references: [id])
+
+  toAccountId String? // Cho phép null nếu rút tiền mặt
+  toAccount   Account? @relation("ToAccount", fields: [toAccountId], references: [id])
+
+  // RULE: Tất cả tiền bạc phải dùng Decimal(15, 2)
+  amount Decimal           @db.Decimal(15, 2)
+  status TransactionStatus @default(PENDING)
+  type   TransactionType
+
+  makerId String?
+  maker   User?   @relation("MakerRelation", fields: [makerId], references: [id])
+
+  checkerId String?
+  checker   User?   @relation("CheckerRelation", fields: [checkerId], references: [id])
+
+  createdAt DateTime @default(now())
+  @@index([fromAccountId], name: "idx_transaction_from_account_id")
+  @@index([toAccountId], name: "idx_transaction_to_account_id")
+}
+
+// 7. Outbox_Events: Queue lưu event cho xử lý bất đồng bộ và đối soát
+model OutboxEvent {
+  id            String  @id @default(uuid())
+  aggregateType String // Ví dụ: "Transaction"
+  aggregateId   String // Chứa ID của Transaction
+  eventType     String // Ví dụ: "MoneyTransferred"
+  payload       Json // Lưu data dạng JSONB trong PostgreSQL
+  isProcessed   Boolean @default(false)
+  isAnalyticsProcessed Boolean @default(false)
+  retryCount    Int     @default(0) 
+  isFailed      Boolean @default(false)
+  createdAt DateTime @default(now())
+  @@index([aggregateId], name: "idx_outbox_aggregate_id")
+}
+
+// 8. Loan_Applications: Cầu nối logic với phần HMDA 
+model LoanApplication {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  // RULE: Tiền bạc
+  loanAmount Decimal @db.Decimal(15, 2)
+  status     String  @default("PENDING") // PENDING, APPROVED, REJECTED
+
+  createdAt DateTime @default(now())
+}
+
+// ==========================================
+// BẢNG LOG IDEMPOTENCY: CHỐNG TRÙNG LẶP GIAO DỊCH
+// ==========================================
+model IdempotencyLog {
+  id             String   @id @default(uuid())
+  key            String   @unique // Đánh unique để tự động chặn trùng lặp ở tầng DB
+  requestPath    String   // Ghi lại xem user đang gọi API nào (VD: /transactions/maker/transfer)
+  responseBody   Json     // Lưu lại kết quả trả về để gửi lại nếu bị gọi trùng
+  responseStatus Int      // Lưu lại HTTP Status Code (VD: 201, 400)
+
+  createdAt      DateTime @default(now())
+
+  // Đánh index để tốc độ tìm kiếm key cực nhanh (vì Interceptor phải check liên tục)
+  @@index([key], name: "idx_idempotency_key")
+}
+</file>
+
+<file path="prisma/seed.ts">
+import 'dotenv/config';
+import { PrismaClient, Role } from '@prisma/client';
+import { faker } from '@faker-js/faker';
+import { Pool } from 'pg';
+import { PrismaPg } from '@prisma/adapter-pg';
+import * as bcrypt from 'bcrypt'; // 1. IMPORT BCRYPT VÀO ĐÂY
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const adapter = new PrismaPg(pool);
+const prisma = new PrismaClient({ adapter });
+
+async function main() {
+  console.log('⏳ Đang khởi tạo Mock Data...');
+
+  // 2. TẠO MỘT MẬT KHẨU MẶC ĐỊNH ĐÃ ĐƯỢC BĂM CHO TẤT CẢ USER
+  const saltRounds = 10;
+  const defaultPassword = await bcrypt.hash('123456', saltRounds);
+
+  const numberOfUsers = 50;
+
+  for (let i = 0; i < numberOfUsers; i++) {
+    await prisma.user.create({
+      data: {
+        // Đặt tên email có quy luật một chút để bạn dễ copy đăng nhập
+        email: `user${i}@aurora.bank`, 
+        password: defaultPassword, // Dùng mật khẩu đã hash
+        role: Role.CUSTOMER,
+        
+        profile: {
+          create: {
+            fullName: faker.person.fullName(), // Cho tên random cho xịn
+            age: faker.number.int({ min: 18, max: 60 }), 
+            gender: faker.helpers.arrayElement(['Male', 'Female']),
+            education: "Bachelor",
+            income: faker.finance.amount({ min: 1000, max: 5000, dec: 2 })
+          },
+        },
+        
+        accounts: {
+          create: {
+            balance: faker.finance.amount({ min: 1000, max: 50000, dec: 2 }),
+          },
+        },
+      },
+    });
+  }
+
+  console.log(`✅ Đã bơm thành công ${numberOfUsers} khách hàng!`);
+  console.log(`🔑 TÀI KHOẢN TEST: user0@aurora.bank -> user49@aurora.bank`);
+  console.log(`🔑 MẬT KHẨU CHUNG: 123456`);
+}
+
+main()
+  .catch((e) => {
+    console.error('❌ Lỗi khi seed data:', e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
+</file>
+
+<file path="README.md">
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+</p>
+
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
+
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+
+## Description
+
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+
+## Project setup
+
+```bash
+$ npm install
+```
+
+## Compile and run the project
+
+```bash
+# development
+$ npm run start
+
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
+```
+
+## Run tests
+
+```bash
+# unit tests
+$ npm run test
+
+# e2e tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
+```
+
+## Deployment
+
+When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+
+If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+
+```bash
+$ npm install -g @nestjs/mau
+$ mau deploy
+```
+
+With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+
+## Resources
+
+Check out a few resources that may come in handy when working with NestJS:
+
+- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
+- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
+- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
+- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
+- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
+- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
+- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
+- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+
+## Support
+
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+
+## Stay in touch
+
+- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
+
+## License
+
+Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+</file>
+
+<file path="src/account-lifecycle/account-lifecycle.module.ts">
+import { Module } from '@nestjs/common';
+import { AccountLifecycleService } from './account-lifecycle.service';
+
+@Module({
+  providers: [AccountLifecycleService]
+})
+export class AccountLifecycleModule {}
+</file>
+
+<file path="src/account-lifecycle/account-lifecycle.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { AccountLifecycleService } from './account-lifecycle.service';
+
+describe('AccountLifecycleService', () => {
+  let service: AccountLifecycleService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [AccountLifecycleService],
+    }).compile();
+
+    service = module.get<AccountLifecycleService>(AccountLifecycleService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+</file>
+
+<file path="src/account-lifecycle/account-lifecycle.service.ts">
+import { Injectable, Logger } from '@nestjs/common';
+import { Cron, CronExpression } from '@nestjs/schedule';
+import { PrismaService } from '../prisma/prisma.service';
+
+@Injectable()
+export class AccountLifecycleService {
+  private readonly logger = new Logger(AccountLifecycleService.name);
+
+  constructor(private prisma: PrismaService) {}
+
+  // Chạy vào 1h sáng mỗi ngày
+  @Cron(CronExpression.EVERY_DAY_AT_1AM)
+  async handleDormantAccounts() {
+    this.logger.log('Bắt đầu quét và chuyển đổi tài khoản sang DORMANT...');
+
+    try {
+      // Dùng Raw SQL để tối ưu hiệu năng: 
+      // Cập nhật các tài khoản ACTIVE thành DORMANT nếu KHÔNG CÓ giao dịch nào liên quan trong 6 tháng qua.
+      const result = await this.prisma.$executeRaw`
+        UPDATE "Account"
+        SET status = 'DORMANT'::"AccountStatus",
+            "updatedAt" = NOW()
+        WHERE status = 'ACTIVE'
+        AND NOT EXISTS (
+          SELECT 1 FROM "Transaction"
+          WHERE ("fromAccountId" = "Account".id OR "toAccountId" = "Account".id)
+          AND "createdAt" >= NOW() - INTERVAL '6 months'
+        );
+      `;
+
+      this.logger.log(`Đã chuyển ${result} tài khoản sang trạng thái DORMANT.`);
+    } catch (error) {
+      this.logger.error('Lỗi khi chạy job ngủ đông tài khoản:', error);
+    }
+  }
+  @Cron('59 23 * * *')
+  async calculateOvernightInterest() {
+    this.logger.log('Bắt đầu tính lãi qua đêm cho hệ thống...');
+
+    try {
+      // Gọi trực tiếp UDF dưới Postgres, trả về số dòng (tài khoản) đã được cộng lãi
+      const updatedRows: any[] = await this.prisma.$queryRaw`
+        SELECT calculate_daily_interest() AS updated_count;
+      `;
+
+      // Vì trả về mảng object, ta bóc tách data
+      const count = updatedRows[0]?.updated_count || 0;
+      this.logger.log(`Hoàn tất cộng lãi qua đêm. Số tài khoản được cộng lãi: ${count}`);
+    } catch (error) {
+      this.logger.error('Lỗi khi chạy UDF tính lãi suất:', error);
+    }
+  }
+  @Cron('*/5 * * * *')
+  async refreshPendingTransactionsView() {
+    try {
+      // Dùng CONCURRENTLY để không lock view trong lúc đang làm mới
+      await this.prisma.$executeRaw`REFRESH MATERIALIZED VIEW CONCURRENTLY mv_pending_transactions_summary;`;
+      // Tắt log dòng này nếu không muốn console bị rác mỗi 5 phút
+      // this.logger.debug('Đã làm mới Materialized View cho Dashboard.'); 
+    } catch (error) {
+      this.logger.error('Lỗi khi refresh Materialized View:', error);
+    }
+  }
+}
+</file>
+
+<file path="src/app.controller.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+
+describe('AppController', () => {
+  let appController: AppController;
+
+  beforeEach(async () => {
+    const app: TestingModule = await Test.createTestingModule({
+      controllers: [AppController],
+      providers: [AppService],
+    }).compile();
+
+    appController = app.get<AppController>(AppController);
+  });
+
+  describe('root', () => {
+    it('should return "Hello World!"', () => {
+      expect(appController.getHello()).toBe('Hello World!');
+    });
+  });
+});
+</file>
+
+<file path="src/app.controller.ts">
+import { Controller, Get } from '@nestjs/common';
+import { AppService } from './app.service';
+
+@Controller()
+export class AppController {
+  constructor(private readonly appService: AppService) {}
+
+  @Get()
+  getHello(): string {
+    return this.appService.getHello();
+  }
+}
+</file>
+
+<file path="src/app.module.ts">
+import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { AppController } from './app.controller';
+import { ScheduleModule } from '@nestjs/schedule';
+import { AppService } from './app.service';
+import { PrismaModule } from './prisma/prisma.module';
+import { UsersModule } from './users/users.module';
+import { TransactionsModule } from './transactions/transactions.module';
+import { OutboxModule } from './outbox/outbox.module';
+import { ReconciliationModule } from './reconciliation/reconciliation.module';
+import { OutboxProcessorModule } from './outbox-processor/outbox-processor.module';
+import { AccountLifecycleModule } from './account-lifecycle/account-lifecycle.module';
+import { BranchesModule } from './branches/branches.module';
+import { EmployeesModule } from './employees/employees.module';
+import { ReportsModule } from './reports/reports.module';
+import { Neo4jModule } from './neo4j/neo4j.module';
+
+@Module({
+  imports: [
+    // Gắn cờ isGlobal: true để dùng Universal toàn project
+    ConfigModule.forRoot({ isGlobal: true }), 
+    UsersModule,
+    ScheduleModule.forRoot(),
+    TransactionsModule,
+    PrismaModule,
+    OutboxModule,
+    ReconciliationModule,
+    OutboxProcessorModule,
+    AccountLifecycleModule,
+    BranchesModule,
+    EmployeesModule,
+    ReportsModule,
+    Neo4jModule,
+  ],
+})
+export class AppModule {}
+</file>
+
+<file path="src/app.service.ts">
+import { Injectable } from '@nestjs/common';
+
+@Injectable()
+export class AppService {
+  getHello(): string {
+    return 'Hello World!';
+  }
+}
+</file>
+
+<file path="src/branches/branches.controller.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { BranchesController } from './branches.controller';
+
+describe('BranchesController', () => {
+  let controller: BranchesController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [BranchesController],
+    }).compile();
+
+    controller = module.get<BranchesController>(BranchesController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
+</file>
+
+<file path="src/branches/branches.controller.ts">
+// src/branches/branches.controller.ts
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import { BranchesService } from './branches.service';
+import { CreateBranchDto } from './dto/create-branch.dto';
+
+@Controller('branches')
+export class BranchesController {
+  constructor(private readonly branchesService: BranchesService) {}
+
+  @Post()
+  // TODO: Add @Roles(Role.MANAGER, Role.AUDITOR) + @UseGuards(...) sau
+  create(@Body() createBranchDto: CreateBranchDto) {
+    return this.branchesService.create(createBranchDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.branchesService.findAll();
+  }
+
+  @Delete(':id')
+  // TODO: Add Role Guards
+  remove(@Param('id') id: string) {
+    return this.branchesService.softDelete(id);
+  }
+}
+</file>
+
+<file path="src/branches/branches.module.ts">
+import { Module } from '@nestjs/common';
+import { BranchesController } from './branches.controller';
+import { BranchesService } from './branches.service';
+
+@Module({
+  controllers: [BranchesController],
+  providers: [BranchesService]
+})
+export class BranchesModule {}
+</file>
+
+<file path="src/branches/branches.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { BranchesService } from './branches.service';
+
+describe('BranchesService', () => {
+  let service: BranchesService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [BranchesService],
+    }).compile();
+
+    service = module.get<BranchesService>(BranchesService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+</file>
+
+<file path="src/branches/branches.service.ts">
+// src/branches/branches.service.ts
+import { Injectable, ConflictException, NotFoundException, BadRequestException } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+import { CreateBranchDto } from './dto/create-branch.dto';
+
+@Injectable()
+export class BranchesService {
+  constructor(private readonly prisma: PrismaService) {}
+
+  async create(createBranchDto: CreateBranchDto) {
+    // PrismaExceptionFilter của bạn có thể đã bắt lỗi Unique (P2002) cho trường 'code',
+    // nhưng check trước ở đây cũng là một lớp bảo vệ tốt.
+    const existingBranch = await this.prisma.branch.findUnique({
+      where: { code: createBranchDto.code },
+    });
+
+    if (existingBranch) {
+      throw new ConflictException(`Chi nhánh với mã ${createBranchDto.code} đã tồn tại.`);
+    }
+
+    return this.prisma.branch.create({
+      data: createBranchDto,
+    });
+  }
+
+  async findAll() {
+    return this.prisma.branch.findMany({
+      where: { isActive: true }, // Mặc định chỉ lấy chi nhánh đang hoạt động
+      include: {
+        _count: {
+          select: { employees: { where: { isActive: true } } } // Đếm số nhân sự hiện tại
+        }
+      }
+    });
+  }
+
+  async softDelete(id: string) {
+    const branch = await this.prisma.branch.findUnique({
+      where: { id },
+      include: {
+        employees: { where: { isActive: true } }
+      }
+    });
+
+    if (!branch) {
+      throw new NotFoundException('Không tìm thấy chi nhánh');
+    }
+
+    // RÀNG BUỘC DBMS: Không cho phép xóa chi nhánh nếu vẫn còn nhân sự đang hoạt động
+    if (branch.employees.length > 0) {
+      throw new BadRequestException('Không thể đóng cửa chi nhánh đang có nhân sự. Vui lòng thuyên chuyển nhân sự trước.');
+    }
+
+    return this.prisma.branch.update({
+      where: { id },
+      data: { 
+        isActive: false,
+        deletedAt: new Date()
+      },
+    });
+  }
+}
+</file>
+
+<file path="src/branches/dto/create-branch.dto.ts">
+// src/branches/dto/create-branch.dto.ts
+import { IsString, IsNotEmpty, IsOptional, MaxLength } from 'class-validator';
+
+export class CreateBranchDto {
+  @IsString()
+  @IsNotEmpty({ message: 'Tên chi nhánh không được để trống' })
+  @MaxLength(100)
+  name: string;
+
+  @IsString()
+  @IsNotEmpty({ message: 'Mã chi nhánh là bắt buộc' })
+  @MaxLength(20)
+  code: string;
+
+  @IsOptional()
+  @IsString()
+  location?: string;
+}
+</file>
+
+<file path="src/common/pagination.dto.ts">
+// src/common/dto/pagination.dto.ts
+import { IsInt, IsOptional, Min } from 'class-validator';
+import { Type } from 'class-transformer';
+
+export class PaginationDto {
+  @IsOptional()
+  @Type(() => Number) // Ép kiểu query param (string) thành number
+  @IsInt()
+  @Min(1)
+  page?: number = 1; // Mặc định là trang 1
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  limit?: number = 10; // Mặc định mỗi trang 10 record
+}
+</file>
+
+<file path="src/employees/dto/create-employee.dto.ts">
+import { IsString, IsNotEmpty, IsUUID, IsEnum, IsOptional } from 'class-validator';
+import { Role } from '@prisma/client'; // Import Enum từ Prisma
+
+export class CreateEmployeeDto {
+  @IsUUID('4', { message: 'userId phải là một UUID hợp lệ' })
+  @IsNotEmpty()
+  userId: string;
+
+  @IsUUID('4', { message: 'branchId phải là một UUID hợp lệ' })
+  @IsNotEmpty()
+  branchId: string;
+
+  @IsString()
+  @IsNotEmpty({ message: 'Vị trí/Chức vụ không được để trống' })
+  position: string;
+
+  @IsEnum(Role, { message: 'Role không hợp lệ (TELLER, MANAGER, AUDITOR)' })
+  @IsOptional()
+  role?: Role = Role.TELLER; // Mặc định gán là TELLER nếu không truyền
+}
+</file>
+
+<file path="src/employees/employees.controller.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { EmployeesController } from './employees.controller';
+
+describe('EmployeesController', () => {
+  let controller: EmployeesController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [EmployeesController],
+    }).compile();
+
+    controller = module.get<EmployeesController>(EmployeesController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
+</file>
+
+<file path="src/employees/employees.controller.ts">
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import { EmployeesService } from './employees.service';
+import { CreateEmployeeDto } from './dto/create-employee.dto';
+
+@Controller('employees')
+export class EmployeesController {
+  constructor(private readonly employeesService: EmployeesService) {}
+
+  @Post()
+  create(@Body() createEmployeeDto: CreateEmployeeDto) {
+    return this.employeesService.create(createEmployeeDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.employeesService.findAll();
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.employeesService.softDelete(id);
+  }
+}
+</file>
+
+<file path="src/employees/employees.module.ts">
+import { Module } from '@nestjs/common';
+import { EmployeesController } from './employees.controller';
+import { EmployeesService } from './employees.service';
+
+@Module({
+  controllers: [EmployeesController],
+  providers: [EmployeesService]
+})
+export class EmployeesModule {}
+</file>
+
+<file path="src/employees/employees.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { EmployeesService } from './employees.service';
+
+describe('EmployeesService', () => {
+  let service: EmployeesService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [EmployeesService],
+    }).compile();
+
+    service = module.get<EmployeesService>(EmployeesService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+</file>
+
+<file path="src/employees/employees.service.ts">
+import { Injectable, NotFoundException, ConflictException, BadRequestException } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+import { CreateEmployeeDto } from './dto/create-employee.dto';
+
+@Injectable()
+export class EmployeesService {
+  constructor(private readonly prisma: PrismaService) {}
+
+  async create(createEmployeeDto: CreateEmployeeDto) {
+    const { userId, branchId, position, role } = createEmployeeDto;
+
+    // 1. Kiểm tra User có tồn tại không
+    const user = await this.prisma.user.findUnique({ where: { id: userId } });
+    if (!user) throw new NotFoundException('Không tìm thấy tài khoản User này');
+
+    // 2. Kiểm tra Chi nhánh có tồn tại và đang hoạt động không
+    const branch = await this.prisma.branch.findUnique({ where: { id: branchId } });
+    if (!branch || !branch.isActive) {
+      throw new BadRequestException('Chi nhánh không tồn tại hoặc đã ngừng hoạt động');
+    }
+
+    // 3. Kiểm tra xem User này đã là nhân viên chưa (userId trong bảng Employee là @unique)
+    const existingEmployee = await this.prisma.employee.findUnique({ where: { userId } });
+    if (existingEmployee && existingEmployee.isActive) {
+      throw new ConflictException('Tài khoản này hiện đã là nhân viên.');
+    }
+
+    // 4. THỰC THI TRANSACTION MỨC DATABASE
+    return this.prisma.$transaction(async (tx) => {
+      // Nếu đã từng làm nhân viên nhưng nghỉ việc (isActive: false), thì update lại.
+      // Nếu chưa từng làm, thì create mới. Dùng upsert cho gọn.
+      const employeeRecord = await tx.employee.upsert({
+        where: { userId },
+        update: {
+          branchId,
+          position,
+          isActive: true,
+          deletedAt: null, // Reset thời gian nghỉ việc
+        },
+        create: {
+          userId,
+          branchId,
+          position,
+        },
+      });
+
+      // Cập nhật Role cho User
+      await tx.user.update({
+        where: { id: userId },
+        data: { role },
+      });
+
+      return employeeRecord;
+    });
+  }
+
+  async findAll() {
+    return this.prisma.employee.findMany({
+      where: { isActive: true },
+      include: {
+        user: { select: { email: true, role: true } }, // Kéo theo email và role để báo cáo dễ đọc
+        branch: { select: { name: true, code: true } } 
+      }
+    });
+  }
+
+  async softDelete(id: string) {
+    const employee = await this.prisma.employee.findUnique({ where: { id } });
+    if (!employee) throw new NotFoundException('Không tìm thấy hồ sơ nhân viên');
+
+    // Lại dùng Transaction: Xóa nhân viên thì phải hạ Role của User xuống CUSTOMER
+    return this.prisma.$transaction(async (tx) => {
+      const removedEmployee = await tx.employee.update({
+        where: { id },
+        data: { 
+          isActive: false, 
+          deletedAt: new Date() 
+        },
+      });
+
+      await tx.user.update({
+        where: { id: employee.userId },
+        data: { role: 'CUSTOMER' }, // Thu hồi quyền truy cập hệ thống nội bộ
+      });
+
+      return removedEmployee;
+    });
+  }
+}
+</file>
+
+<file path="src/filters/prisma-exception.filter.ts">
+// src/filters/prisma-exception.filter.ts
+import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
+import { Response } from 'express';
+
+// Decorator @Catch chỉ định rằng Filter này CHỈ rình và bắt các lỗi phát sinh từ Prisma
+@Catch(Prisma.PrismaClientKnownRequestError)
+export class PrismaExceptionFilter implements ExceptionFilter {
+  catch(exception: Prisma.PrismaClientKnownRequestError, host: ArgumentsHost) {
+    const ctx = host.switchToHttp();
+    const response = ctx.getResponse<Response>();
+
+    // Mặc định cứ cho là lỗi 500 (Internal Server Error)
+    let status = HttpStatus.INTERNAL_SERVER_ERROR;
+    let message = 'Lỗi hệ thống nội bộ. Vui lòng thử lại sau.';
+
+    // Bắt đầu "bắt mạch" các mã lỗi đặc trưng của Prisma
+    switch (exception.code) {
+      case 'P2002': // Lỗi vi phạm Unique Constraint (ví dụ: tạo user bị trùng email)
+        status = HttpStatus.CONFLICT; // Ép về lỗi 409 Conflict (Trùng đột)
+        message = 'Dữ liệu đã tồn tại trong hệ thống. Vui lòng sử dụng thông tin khác.';
+        break;
+      
+      case 'P2025': // Lỗi thao tác với record không tồn tại (ví dụ: update/delete user id bị sai)
+        status = HttpStatus.NOT_FOUND; // Ép về lỗi 404 Not Found
+        message = 'Không tìm thấy dữ liệu yêu cầu.';
+        break;
+        
+      // Bạn có thể thêm case 'P2003' cho lỗi khóa ngoại (Foreign key constraint) nếu muốn
+    }
+
+    // Trả về JSON theo đúng chuẩn TransformInterceptor mà bạn đã quy định
+    response.status(status).json({
+      statusCode: status,
+      message: message,
+      data: null, // Đã lỗi thì không có data
+      timestamp: new Date().toISOString(),
+    });
+  }
+}
+</file>
+
+<file path="src/interceptors/idempotency/idempotency.interceptor.spec.ts">
+import { IdempotencyInterceptor } from './idempotency.interceptor';
+
+describe('IdempotencyInterceptor', () => {
+  it('should be defined', () => {
+    expect(new IdempotencyInterceptor()).toBeDefined();
+  });
+});
+</file>
+
+<file path="src/interceptors/idempotency/idempotency.interceptor.ts">
+import {
+  Injectable,
+  NestInterceptor,
+  ExecutionContext,
+  CallHandler,
+  HttpException,
+  HttpStatus,
+  Logger,
+} from '@nestjs/common';
+import { Observable, of } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { PrismaService } from '../../prisma/prisma.service'; // Đã sửa đường dẫn chuẩn theo ảnh
+
+@Injectable()
+export class IdempotencyInterceptor implements NestInterceptor {
+  private readonly logger = new Logger(IdempotencyInterceptor.name);
+
+  constructor(private readonly prisma: PrismaService) {}
+
+  async intercept(context: ExecutionContext, next: CallHandler): Promise<Observable<any>> {
+    const request = context.switchToHttp().getRequest();
+    const response = context.switchToHttp().getResponse();
+    
+    // 1. Đọc key từ Header
+    const idempotencyKey = request.headers['x-idempotency-key'];
+
+    if (!idempotencyKey) {
+      throw new HttpException(
+        'Bắt buộc phải có header x-idempotency-key cho giao dịch này',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    // 2. Kiểm tra DB xem key này đã xử lý chưa
+    const existingLog = await this.prisma.idempotencyLog.findUnique({
+      where: { key: idempotencyKey as string },
+    });
+
+    if (existingLog) {
+      this.logger.warn(`♻️ Trùng Idempotency Key: ${idempotencyKey}. Trả về kết quả cũ.`);
+      response.status(existingLog.responseStatus);
+      return of(existingLog.responseBody);
+    }
+
+    // 3. Nếu mới, cho đi tiếp và lưu kết quả sau khi xử lý xong
+    return next.handle().pipe(
+      tap(async (resBody) => {
+        try {
+          await this.prisma.idempotencyLog.create({
+            data: {
+              key: idempotencyKey as string,
+              requestPath: request.url,
+              responseBody: resBody || {}, 
+              responseStatus: response.statusCode, 
+            },
+          });
+        } catch (error) {
+          this.logger.error('Không thể lưu Idempotency Log', error.stack);
+        }
+      }),
+    );
+  }
+}
+</file>
+
+<file path="src/interceptors/transform/transform.interceptor.spec.ts">
+import { TransformInterceptor } from './transform.interceptor';
+
+describe('TransformInterceptor', () => {
+  it('should be defined', () => {
+    expect(new TransformInterceptor()).toBeDefined();
+  });
+});
+</file>
+
+<file path="src/interceptors/transform/transform.interceptor.ts">
+import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+// Định nghĩa form chuẩn cho toàn bộ API
+export interface Response<T> {
+  statusCode: number;
+  message: string;
+  data: T;
+  timestamp: string;
+}
+
+@Injectable()
+export class TransformInterceptor<T> implements NestInterceptor<T, Response<T>> {
+  intercept(context: ExecutionContext, next: CallHandler): Observable<Response<T>> {
+    const ctx = context.switchToHttp();
+    const response = ctx.getResponse();
+
+    // next.handle() là lúc Controller xử lý xong và nhả dữ liệu ra
+    return next.handle().pipe(
+      map((data) => {
+        // Tự động nhận diện nếu Controller muốn gửi message tùy chỉnh
+        const message = data?.message || 'Xử lý thành công';
+        
+        // Loại bỏ trường message ra khỏi data để tránh lặp dữ liệu
+        let responseData = data;
+        if (data && typeof data === 'object' && !Array.isArray(data) && 'message' in data) {
+          const { message: _, ...rest } = data;
+          responseData = Object.keys(rest).length > 0 ? rest : null;
+        }
+
+        return {
+          statusCode: response.statusCode,
+          message: message,
+          data: responseData,
+          timestamp: new Date().toISOString(),
+        };
+      }),
+    );
+  }
+}
+</file>
+
+<file path="src/main.ts">
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { TransformInterceptor } from './interceptors/transform/transform.interceptor';
+import { ValidationPipe } from '@nestjs/common';
+import { PrismaExceptionFilter } from './filters/prisma-exception.filter';
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.useGlobalInterceptors(new TransformInterceptor());
+  app.useGlobalFilters(new PrismaExceptionFilter());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true, // Tự động loại bỏ các field không có trong DTO
+      forbidNonWhitelisted: true, // Báo lỗi nếu user cố tình gửi field lạ (chống NoSQL/SQL Injection)
+      transform: true, // Tự động ép kiểu (VD: string '1' ở query thành number 1)
+    }),
+  );
+  // 1. Bật CORS cho phép Frontend (đang chạy cổng 3000) gọi API
+  app.enableCors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  });
+
+  // 2. Ưu tiên chạy cổng 3001 để nhường cổng 3000 cho Next.js
+  await app.listen(process.env.PORT ?? 3001);
+  console.log('🚀 Backend Core Banking đang chạy tại: http://localhost:3001');
+}
+bootstrap();
+</file>
+
+<file path="src/neo4j/neo4j.module.ts">
+import { Module, Global } from '@nestjs/common';
+import { Neo4jService } from './neo4j.service';
+
+@Global() // Đánh dấu Global để dùng chung toàn mạng
+@Module({
+  providers: [Neo4jService],
+  exports: [Neo4jService], // <--- THIẾU DÒNG NÀY LÀ NESTJS SẼ BÁO LỖI Y NHƯ BẠN ĐANG GẶP
+})
+export class Neo4jModule {}
+</file>
+
+<file path="src/neo4j/neo4j.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { Neo4jService } from './neo4j.service';
+
+describe('Neo4jService', () => {
+  let service: Neo4jService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [Neo4jService],
+    }).compile();
+
+    service = module.get<Neo4jService>(Neo4jService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+</file>
+
+<file path="src/neo4j/neo4j.service.ts">
+import { Injectable, OnModuleDestroy, OnModuleInit, Logger } from '@nestjs/common';
+import neo4j, { Driver } from 'neo4j-driver';
+
+@Injectable()
+export class Neo4jService implements OnModuleInit, OnModuleDestroy {
+  private driver: Driver;
+  private readonly logger = new Logger(Neo4jService.name);
+
+  onModuleInit() {
+    // Thay thế bằng URI và thông tin đăng nhập Neo4j của bạn (Docker hoặc AuraDB)
+    this.driver = neo4j.driver(
+      'bolt://localhost:7687', 
+      neo4j.auth.basic('neo4j', 'password')
+    );
+    this.logger.log('✅ Đã kết nối Neo4j Database');
+  }
+
+  onModuleDestroy() {
+    this.driver.close();
+  }
+
+  // Hàm thực thi Cypher Query
+  async writeQuery(cypher: string, params?: any) {
+    const session = this.driver.session();
+    try {
+      // Đổi writeTransaction thành executeWrite
+      const result = await session.executeWrite((tx) => tx.run(cypher, params));
+      return result;
+    } catch (error) {
+      this.logger.error(`Lỗi khi ghi data vào Neo4j: ${error.message}`);
+      throw error;
+    } finally {
+      await session.close();
+    }
+  }
+}
+</file>
+
+<file path="src/outbox-processor/outbox-processor.module.ts">
+import { Module } from '@nestjs/common';
+import { OutboxProcessorService } from './outbox-processor.service';
+import { PrismaModule } from '../prisma/prisma.module';
+import { Neo4jModule } from '../neo4j/neo4j.module';
+@Module({
+  imports: [
+    PrismaModule,
+    Neo4jModule // <--- KÉO MODULE NEO4J VÀO ĐÂY
+  ],
+  providers: [OutboxProcessorService],
+})
+export class OutboxProcessorModule {}
+</file>
+
+<file path="src/outbox-processor/outbox-processor.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { OutboxProcessorService } from './outbox-processor.service';
+
+describe('OutboxProcessorService', () => {
+  let service: OutboxProcessorService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [OutboxProcessorService],
+    }).compile();
+
+    service = module.get<OutboxProcessorService>(OutboxProcessorService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+</file>
+
+<file path="src/outbox-processor/outbox-processor.service.ts">
+import { Injectable, Logger } from '@nestjs/common';
+import { Cron, CronExpression } from '@nestjs/schedule';
+import { PrismaService } from '../prisma/prisma.service';
+import { maskEmail, hashIdentifier } from './utils';
+import { Neo4jService } from '../neo4j/neo4j.service';
+@Injectable()
+export class OutboxProcessorService {
+  private readonly logger = new Logger(OutboxProcessorService.name);
+
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly neo4jService: Neo4jService 
+  ) {}
+
+  @Cron(CronExpression.EVERY_10_SECONDS)
+  async processOutboxEvents() {
+    try {
+      await this.prisma.$transaction(async (tx) => {
+        // Nhặt 50 events (Thêm điều kiện isFailed = false)
+        const unprocessedEvents: any[] = await tx.$queryRaw`
+          SELECT * FROM "OutboxEvent"
+          WHERE "isAnalyticsProcessed" = false AND "isFailed" = false
+          ORDER BY "createdAt" ASC
+          LIMIT 50
+          FOR UPDATE SKIP LOCKED;
+        `;
+
+        if (!unprocessedEvents || unprocessedEvents.length === 0) {
+          return; 
+        }
+
+        this.logger.log(`📊 [Pipeline Worker] Bắt đầu xử lý ${unprocessedEvents.length} Outbox Events...`);
+
+        for (const event of unprocessedEvents) {
+          try {
+            const payload = typeof event.payload === 'string' ? JSON.parse(event.payload) : event.payload;
+
+              const flattenedData = {
+                eventId: event.id,
+                eventType: event.eventType, // Giả sử là 'TRANSFER'
+                fromAccount: payload.fromAccountId ? hashIdentifier(payload.fromAccountId) : null,
+                toAccount: payload.toAccountId ? hashIdentifier(payload.toAccountId) : null,
+                transactionAmount: payload.amount ? parseFloat(payload.amount) : 0, 
+                occurredAt: event.createdAt,
+              };
+
+              // [LOGIC AML NEO4J]: CHỈ VẼ ĐỒ THỊ KHI ĐÓ LÀ LỆNH CHUYỂN KHOẢN (CÓ NGƯỜI GỬI VÀ NGƯỜI NHẬN)
+              if (flattenedData.eventType === 'TRANSFER' && flattenedData.fromAccount && flattenedData.toAccount) {
+                const cypher = `
+                  // 1. Tìm hoặc tạo Node Người Gửi
+                  MERGE (sender:Account { id: $fromAccount })
+                  
+                  // 2. Tìm hoặc tạo Node Người Nhận
+                  MERGE (receiver:Account { id: $toAccount })
+                  
+                  // 3. Vẽ mũi tên dòng tiền (Relationship)
+                  MERGE (sender)-[t:TRANSFERRED { eventId: $eventId }]->(receiver)
+                  ON CREATE SET t.amount = $amount, t.timestamp = $date
+                `;
+
+                await this.neo4jService.writeQuery(cypher, {
+                  fromAccount: flattenedData.fromAccount,
+                  toAccount: flattenedData.toAccount,
+                  eventId: flattenedData.eventId,
+                  amount: flattenedData.transactionAmount,
+                  date: flattenedData.occurredAt.toISOString(),
+                });
+                
+                this.logger.debug(`[Neo4j] Đã vẽ Graph Event ID: ${event.id}`);
+              }
+
+            // Đánh dấu thành công
+            await tx.$executeRaw`
+              UPDATE "OutboxEvent"
+              SET "isAnalyticsProcessed" = true
+              WHERE id = ${event.id};
+            `;
+          } catch (eventError) {
+            // DEAD-LETTER QUEUE CHO DATA PIPELINE
+            const newRetryCount = (event.retryCount || 0) + 1;
+            const isNowFailed = newRetryCount >= 3;
+
+            await tx.$executeRaw`
+              UPDATE "OutboxEvent"
+              SET "retryCount" = ${newRetryCount},
+                  "isFailed" = ${isNowFailed}
+              WHERE id = ${event.id};
+            `;
+            this.logger.error(`❌ [Pipeline Worker] Lỗi Flatten Data Event ID ${event.id}. Chuyển vào DLQ nếu >=3.`, eventError.stack);
+          }
+        }
+        this.logger.log(`✅ [Pipeline Worker] Đã xử lý xong batch ${unprocessedEvents.length} events.`);
+      });
+    } catch (error) {
+      this.logger.error('Lỗi Transaction khi quét OutboxEvent Pipeline', error.stack);
+    }
+  }
+}
+</file>
+
+<file path="src/outbox-processor/utils.ts">
+// Đường dẫn: src/outbox-processor/utils.ts
+
+import * as crypto from 'crypto';
+
+export function maskEmail(email: string): string {
+  if (!email || !email.includes('@')) return email;
+  const [namePart, domainPart] = email.split('@');
+  if (namePart.length <= 2) return `${namePart[0]}*@${domainPart}`;
+
+  const firstChar = namePart[0];
+  const lastChar = namePart[namePart.length - 1];
+  const maskedName = firstChar + '*'.repeat(namePart.length - 2) + lastChar;
+  return `${maskedName}@${domainPart}`;
+}
+
+export function hashIdentifier(id: string): string {
+  return crypto.createHash('sha256').update(id).digest('hex').substring(0, 12);
+}
+</file>
+
+<file path="src/outbox/outbox.module.ts">
+import { Module } from '@nestjs/common';
+import { OutboxService } from './outbox.service';
+
+@Module({
+  providers: [OutboxService]
+})
+export class OutboxModule {}
+</file>
+
+<file path="src/outbox/outbox.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { OutboxService } from './outbox.service';
+
+describe('OutboxService', () => {
+  let service: OutboxService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [OutboxService],
+    }).compile();
+
+    service = module.get<OutboxService>(OutboxService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+</file>
+
+<file path="src/outbox/outbox.service.ts">
+import { Injectable, Logger } from '@nestjs/common';
+import { Cron, CronExpression } from '@nestjs/schedule';
+import { PrismaService } from '../prisma/prisma.service';
+
+@Injectable()
+
+export class OutboxService {
+  // Khởi tạo Logger để in ra terminal cho đẹp
+  private readonly logger = new Logger(OutboxService.name);
+
+  constructor(private prisma: PrismaService) {}
+
+  // Cứ mỗi 10 giây hàm này sẽ tự động được gọi 1 lần
+  @Cron(CronExpression.EVERY_10_SECONDS)
+  async processOutboxEvents() {
+    try {
+      // Dùng Transaction để đảm bảo tính ACID khi update trạng thái
+      await this.prisma.$transaction(async (tx) => {
+        // 1. DÙNG RAW SQL + SKIP LOCKED ĐỂ TÌM VÀ KHÓA EVENT
+        const events: any[] = await tx.$queryRaw`
+          SELECT id, "payload", "eventType", "retryCount" 
+          FROM "OutboxEvent"
+          WHERE "isProcessed" = false AND "isFailed" = false
+          ORDER BY "createdAt" ASC
+          LIMIT 1
+          FOR UPDATE SKIP LOCKED;
+        `;
+
+        // Nếu không có event nào thì thoát ra, đợi 10 giây sau quét tiếp
+        if (!events || events.length === 0) {
+          return; 
+        }
+
+        const event = events[0];
+        this.logger.log(`🔄 Tìm thấy Event [${event.eventType}] ID: ${event.id}`);
+        this.logger.verbose(`📦 Payload: ${JSON.stringify(event.payload)}`);
+        try {
+          // 2. NƠI XỬ LÝ LOGIC CORE BANKING (Giả lập 1s)
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+
+          // 3. THÀNH CÔNG: ĐÁNH DẤU LÀ ĐÃ XỬ LÝ
+          await tx.$executeRaw`
+            UPDATE "OutboxEvent"
+            SET "isProcessed" = true
+            WHERE id = ${event.id};
+          `;
+          this.logger.log(`✅ Đã xử lý thành công Event ID: ${event.id}`);
+        } catch (logicError) {
+          // XỬ LÝ DEAD-LETTER QUEUE NẾU LOGIC LỖI
+          const newRetryCount = (event.retryCount || 0) + 1;
+          const isNowFailed = newRetryCount >= 3;
+
+          await tx.$executeRaw`
+            UPDATE "OutboxEvent"
+            SET "retryCount" = ${newRetryCount},
+                "isFailed" = ${isNowFailed}
+            WHERE id = ${event.id};
+          `;
+          this.logger.warn(`⚠️ [Core Worker] Event ${event.id} lỗi lần ${newRetryCount}. Failed state: ${isNowFailed}`);
+        }
+      });
+    } catch (error) {
+      this.logger.error('❌ Lỗi hệ thống khi quét OutboxEvent', error.stack);
+    }
+  }
+}
+</file>
+
+<file path="src/prisma/prisma.module.ts">
+import { Global, Module } from '@nestjs/common';
+import { PrismaService } from './prisma.service';
+
+@Global() // Đánh dấu đây là module toàn cục
+@Module({
+  providers: [PrismaService],
+  exports: [PrismaService], // Export để các module khác có quyền sử dụng PrismaService
+})
+export class PrismaModule {}
+</file>
+
+<file path="src/prisma/prisma.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { PrismaService } from './prisma.service';
+
+describe('PrismaService', () => {
+  let service: PrismaService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [PrismaService],
+    }).compile();
+
+    service = module.get<PrismaService>(PrismaService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+</file>
+
+<file path="src/prisma/prisma.service.ts">
+import { Injectable, OnModuleInit } from '@nestjs/common';
+import { PrismaClient } from '@prisma/client';
+import { Pool } from 'pg';
+import { PrismaPg } from '@prisma/adapter-pg';
+
+@Injectable()
+export class PrismaService extends PrismaClient implements OnModuleInit {
+  constructor() {
+    // Khởi tạo Adapter
+    const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+    const adapter = new PrismaPg(pool);
+
+    // Truyền adapter xuống class cha (PrismaClient)
+    super({ adapter });
+  }
+
+  async onModuleInit() {
+    await this.$connect();
+    console.log('📦 Database connected successfully via Prisma');
+  }
+  async onModuleDestroy() {
+    await this.$disconnect();
+  }
+}
+</file>
+
+<file path="src/reconciliation/reconciliation.controller.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { ReconciliationController } from './reconciliation.controller';
+
+describe('ReconciliationController', () => {
+  let controller: ReconciliationController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [ReconciliationController],
+    }).compile();
+
+    controller = module.get<ReconciliationController>(ReconciliationController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
+</file>
+
+<file path="src/reconciliation/reconciliation.controller.ts">
+import { Controller, Post } from '@nestjs/common';
+import { ReconciliationService } from './reconciliation.service';
+
+@Controller('reconciliation')
+export class ReconciliationController {
+  constructor(private readonly reconciliationService: ReconciliationService) {}
+
+  // API để test chạy đối soát thủ công qua Postman/REST Client
+  @Post('trigger-manual')
+  async triggerManual() {
+    return await this.reconciliationService.triggerManualReconciliation();
+  }
+}
+</file>
+
+<file path="src/reconciliation/reconciliation.module.ts">
+import { Module } from '@nestjs/common';
+import { ReconciliationService } from './reconciliation.service';
+import { ReconciliationController } from './reconciliation.controller';
+import { PrismaModule } from '../prisma/prisma.module'; // <-- Thêm dòng này (đường dẫn tùy cấu trúc của bạn)
+
+@Module({
+  imports: [PrismaModule], // <-- Inject PrismaModule vào
+  providers: [ReconciliationService],
+  controllers: [ReconciliationController]
+})
+export class ReconciliationModule {}
+</file>
+
+<file path="src/reconciliation/reconciliation.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { ReconciliationService } from './reconciliation.service';
+
+describe('ReconciliationService', () => {
+  let service: ReconciliationService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [ReconciliationService],
+    }).compile();
+
+    service = module.get<ReconciliationService>(ReconciliationService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+</file>
+
+<file path="src/reconciliation/reconciliation.service.ts">
+import { Injectable, Logger } from '@nestjs/common';
+import { Cron, CronExpression } from '@nestjs/schedule';
+import { PrismaService } from '../prisma/prisma.service';
+
+@Injectable()
+export class ReconciliationService {
+  private readonly logger = new Logger(ReconciliationService.name);
+
+  constructor(private prisma: PrismaService) {}
+
+  @Cron('59 23 * * *') 
+  async performDailyReconciliation() {
+    this.logger.log('Bắt đầu tiến trình Đối soát cuối ngày (Daily Reconciliation)...');
+
+    try {
+      await this.prisma.$transaction(async (tx) => {
+        // ==========================================
+        // 1. QUÉT & TỰ ĐỘNG HOÀN TIÊN GIAO DỊCH KẸT
+        // ==========================================
+        // Dùng Raw SQL để vừa tìm vừa khóa dòng an toàn
+        const orphanedTransactions: any[] = await tx.$queryRaw`
+          SELECT id, amount, "fromAccountId"
+          FROM "Transaction"
+          WHERE status = 'PENDING' 
+            AND "createdAt" < NOW() - INTERVAL '24 hours'
+          FOR UPDATE SKIP LOCKED;
+        `;
+
+        if (orphanedTransactions.length > 0) {
+          this.logger.warn(`[ALERT] Phát hiện ${orphanedTransactions.length} giao dịch kẹt ở PENDING quá 24h. Bắt đầu hoàn tiền...`);
+          console.table(orphanedTransactions); 
+
+          for (const txRecord of orphanedTransactions) {
+            if (!txRecord.fromAccountId) continue;
+
+            // Đổi trạng thái giao dịch thành FAILED
+            await tx.$executeRaw`
+              UPDATE "Transaction"
+              SET status = 'FAILED'
+              WHERE id = ${txRecord.id};
+            `;
+
+            // Rút tiền khỏi frozenBalance và trả lại vào balance
+            await tx.$executeRaw`
+              UPDATE "Account"
+              SET "frozenBalance" = "frozenBalance" - ${txRecord.amount},
+                  "balance" = "balance" + ${txRecord.amount}
+              WHERE id = ${txRecord.fromAccountId};
+            `;
+            
+            this.logger.log(`💵 Đã tự động hoàn ${txRecord.amount} về tài khoản ${txRecord.fromAccountId}`);
+          }
+        } else {
+          this.logger.log('[OK] Không có giao dịch PENDING nào bị kẹt.');
+        }
+
+        // ==========================================
+        // 2. QUÉT OUTBOX EVENT KẸT (Data Pipeline/Core)
+        // ==========================================
+        // Quét những event kẹt cứng (Failed) hoặc bị bỏ quên chưa ai xử lý
+        const orphanedOutboxEvents = await tx.$queryRaw`
+          SELECT id, "aggregateId", "eventType"
+          FROM "OutboxEvent"
+          WHERE ("isProcessed" = false OR "isAnalyticsProcessed" = false OR "isFailed" = true)
+            AND "createdAt" < NOW() - INTERVAL '24 hours'
+          LIMIT 50;
+        `;
+
+        // Ở đây biến trả về từ $queryRaw có thể coi là array, ta check length:
+        if (Array.isArray(orphanedOutboxEvents) && orphanedOutboxEvents.length > 0) {
+          this.logger.error(`[CRITICAL ALERT] Phát hiện ${orphanedOutboxEvents.length} OutboxEvent kẹt hoặc Failed! IT cần kiểm tra gấp.`);
+          console.table(orphanedOutboxEvents);
+        } else {
+          this.logger.log('[OK] Không có OutboxEvent nào kẹt. Pipeline mượt mà.');
+        }
+
+      });
+
+      this.logger.log('✅ Hoàn tất tiến trình Đối soát cuối ngày.');
+
+    } catch (error) {
+      this.logger.error('❌ Lỗi nghiêm trọng trong quá trình chạy Cronjob Đối soát', error.stack);
+    }
+  }
+
+  // Cực kỳ hữu ích để gọi qua Controller lúc bảo vệ đồ án
+  async triggerManualReconciliation() {
+    await this.performDailyReconciliation();
+    return { message: 'Đã kích hoạt tiến trình đối soát tự động hoàn tiền.' };
+  }
+}
+</file>
+
+<file path="src/reports/dto/daily-report.dto.ts">
+import { IsDateString, IsOptional, IsString } from 'class-validator';
+
+export class DailyReportDto {
+  @IsOptional()
+  @IsDateString({}, { message: 'startDate phải là chuỗi ngày tháng ISO (VD: 2026-05-01)' })
+  startDate?: string;
+
+  @IsOptional()
+  @IsDateString({}, { message: 'endDate phải là chuỗi ngày tháng ISO (VD: 2026-05-31)' })
+  endDate?: string;
+
+  @IsOptional()
+  @IsString()
+  branchId?: string;
+}
+</file>
+
+<file path="src/reports/reports.controller.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { ReportsController } from './reports.controller';
+
+describe('ReportsController', () => {
+  let controller: ReportsController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [ReportsController],
+    }).compile();
+
+    controller = module.get<ReportsController>(ReportsController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
+</file>
+
+<file path="src/reports/reports.controller.ts">
+import { Controller, Get, Query } from '@nestjs/common';
+import { ReportsService } from './reports.service';
+import { DailyReportDto } from './dto/daily-report.dto';
+
+@Controller('reports')
+export class ReportsController {
+  constructor(private readonly reportsService: ReportsService) {}
+
+  @Get('summary')
+  getSummary() {
+    return this.reportsService.getSystemSummary();
+  }
+
+  @Get('daily-activities')
+  getDailyActivities(@Query() filter: DailyReportDto) {
+    return this.reportsService.getDailyActivities(filter);
+  }
+}
+</file>
+
+<file path="src/reports/reports.cron.ts">
+import { Injectable, Logger } from '@nestjs/common';
+   import { Cron, CronExpression } from '@nestjs/schedule';
+   import { PrismaService } from '../prisma/prisma.service';
+
+   @Injectable()
+   export class ReportsCronService {
+     private readonly logger = new Logger(ReportsCronService.name);
+
+     constructor(private readonly prisma: PrismaService) {}
+
+     // Chạy vào lúc 00:01 mỗi ngày
+     // Dùng CronExpression.EVERY_MINUTE nếu bạn muốn test thử ngay lập tức
+     @Cron('1 0 * * *') 
+     async refreshBranchDailyStats() {
+       this.logger.log('Bắt đầu chốt sổ EOD: Refreshing Materialized View...');
+       
+       try {
+         // Chú ý chữ CONCURRENTLY: Nó giúp PostgreSQL cập nhật data ngầm
+         // mà KHÔNG KHÓA BẢNG. API vẫn có thể đọc data cũ trong lúc đang tính toán data mới.
+         await this.prisma.$executeRawUnsafe(
+           `REFRESH MATERIALIZED VIEW CONCURRENTLY mv_branch_daily_stats;`
+         );
+         this.logger.log('Chốt sổ EOD thành công!');
+       } catch (error) {
+         this.logger.error('Lỗi khi chốt sổ EOD:', error);
+       }
+     }
+   }
+</file>
+
+<file path="src/reports/reports.module.ts">
+import { Module } from '@nestjs/common';
+import { ReportsController } from './reports.controller';
+import { ReportsService } from './reports.service';
+
+@Module({
+  controllers: [ReportsController],
+  providers: [ReportsService]
+})
+export class ReportsModule {}
+</file>
+
+<file path="src/reports/reports.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { ReportsService } from './reports.service';
+
+describe('ReportsService', () => {
+  let service: ReportsService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [ReportsService],
+    }).compile();
+
+    service = module.get<ReportsService>(ReportsService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+</file>
+
+<file path="src/reports/reports.service.ts">
+import { Injectable } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+import { DailyReportDto } from './dto/daily-report.dto';
+import { Prisma } from '@prisma/client';
+
+@Injectable()
+export class ReportsService {
+  constructor(private readonly prisma: PrismaService) {}
+
+  // 1. FIX LỖI 1: Khôi phục lại hàm System Summary
+  async getSystemSummary() {
+    const [totalUsers, totalActiveAccounts, totalSystemBalance] = await Promise.all([
+      this.prisma.user.count(),
+      this.prisma.account.count({ where: { status: 'ACTIVE' } }),
+      this.prisma.account.aggregate({
+        _sum: { balance: true, frozenBalance: true },
+        where: { status: 'ACTIVE' }
+      })
+    ]);
+
+    return {
+      totalUsers,
+      totalActiveAccounts,
+      totalBalance: totalSystemBalance._sum.balance || 0,
+      totalFrozenBalance: totalSystemBalance._sum.frozenBalance || 0,
+    };
+  }
+
+  // 2. FIX LỖI 2: Đồng bộ type DailyReportDto và viết Dynamic Query
+  async getDailyActivities(filter: DailyReportDto) {
+    const { startDate, endDate, branchId } = filter;
+    
+    // Tạo mảng chứa các điều kiện lọc an toàn
+    const conditions: Prisma.Sql[] = [];
+
+    if (branchId) {
+      conditions.push(Prisma.sql`"branchId" = ${branchId}`);
+    }
+    if (startDate) {
+      conditions.push(Prisma.sql`"date" >= ${new Date(startDate)}`);
+    }
+    if (endDate) {
+      conditions.push(Prisma.sql`"date" <= ${new Date(endDate)}`);
+    }
+
+    // Nếu có điều kiện, nối chúng lại bằng chữ ' AND ', nếu không thì để trống
+    const whereClause = conditions.length > 0 
+      ? Prisma.sql`WHERE ${Prisma.join(conditions, ' AND ')}` 
+      : Prisma.empty;
+
+    // Truy vấn trực tiếp vào Materialized View thay vì bảng Transaction
+    return this.prisma.$queryRaw`
+      SELECT * FROM mv_branch_daily_stats
+      ${whereClause}
+      ORDER BY "date" DESC, "branchId" ASC
+      LIMIT 100;
+    `;
+  }
+}
+</file>
+
+<file path="src/transactions/transactions.controller.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { TransactionsController } from './transactions.controller';
+
+describe('TransactionsController', () => {
+  let controller: TransactionsController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [TransactionsController],
+    }).compile();
+
+    controller = module.get<TransactionsController>(TransactionsController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
+</file>
+
+<file path="src/transactions/transactions.controller.ts">
+import { Controller, Post, Body, Param, Put } from '@nestjs/common';
+import { TransactionsService } from './transactions.service';
+
+@Controller('api/transactions')
+export class TransactionsController {
+  constructor(private readonly transactionsService: TransactionsService) {}
+
+  // 1. Endpoint cho Teller (Maker) tạo lệnh chuyển tiền
+  @Post('transfer/maker')
+  createMakerTransfer(
+    @Body('makerId') makerId: string,
+    @Body('fromAccountId') fromAccountId: string,
+    @Body('toAccountId') toAccountId: string,
+    @Body('amount') amount: number | string,
+  ) {
+    // Đã thay thế transferFunds bằng createMakerTransfer
+    return this.transactionsService.createMakerTransfer(
+      makerId,
+      fromAccountId,
+      toAccountId,
+      amount,
+    );
+  }
+
+  // 2. Endpoint cho Manager (Checker) duyệt/từ chối lệnh
+  @Put('transfer/checker/:transactionId')
+  reviewMakerTransfer(
+    @Param('transactionId') transactionId: string,
+    @Body('checkerId') checkerId: string,
+    @Body('action') action: 'APPROVE' | 'REJECT',
+  ) {
+    return this.transactionsService.reviewMakerTransfer(
+      checkerId,
+      transactionId,
+      action,
+    );
+  }
+}
+</file>
+
+<file path="src/transactions/transactions.module.ts">
+import { Module } from '@nestjs/common';
+import { TransactionsService } from './transactions.service';
+import { TransactionsController } from './transactions.controller';
+
+@Module({
+  providers: [TransactionsService],
+  controllers: [TransactionsController]
+})
+export class TransactionsModule {}
+</file>
+
+<file path="src/transactions/transactions.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { TransactionsService } from './transactions.service';
+
+describe('TransactionsService', () => {
+  let service: TransactionsService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [TransactionsService],
+    }).compile();
+
+    service = module.get<TransactionsService>(TransactionsService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+</file>
+
+<file path="src/transactions/transactions.service.ts">
+import { Injectable, BadRequestException } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+import { TransactionStatus, TransactionType, Prisma } from '@prisma/client'; // <-- MỚI: Import Prisma từ đây
+
+@Injectable()
+export class TransactionsService {
+  constructor(private prisma: PrismaService) {}
+
+  async createMakerTransfer(makerId: string, fromAccountId: string, toAccountId: string, inputAmount: number | string) {
+    // SỬ DỤNG Prisma.Decimal THAY VÌ import rời
+    const amount = new Prisma.Decimal(inputAmount);
+
+    if (amount.lte(0)) throw new BadRequestException('Số tiền chuyển phải lớn hơn 0');
+
+    // Bắt đầu một Transaction đảm bảo chuẩn ACID
+    return await this.prisma.$transaction(async (tx) => {
+      // 2. LOCK TÀI KHOẢN NGƯỜI GỬI BẰNG RAW SQL
+      const senderAcc: any[] = await tx.$queryRaw`
+        SELECT id, balance 
+        FROM "Account" 
+        WHERE id = ${fromAccountId} 
+        FOR UPDATE; 
+      `;
+
+      if (!senderAcc || senderAcc.length === 0) {
+        throw new BadRequestException('Không tìm thấy tài khoản người gửi');
+      }
+
+      // Prisma trả về array, đọc balance dưới dạng Decimal
+      const currentBalance = new Prisma.Decimal(senderAcc[0].balance);
+
+      // 3. KIỂM TRA SỐ DƯ
+      if (currentBalance.lt(amount)) {
+        throw new BadRequestException('Số dư không đủ để thực hiện giao dịch');
+      }
+
+      // 4. ĐÓNG BĂNG TIỀN (Luồng Maker: Trừ balance khả dụng, cộng vào frozenBalance)
+      // Vẫn giữ phong cách Raw SQL của bạn, Prisma sẽ tự parse tham số Decimal an toàn
+      await tx.$executeRaw`
+        UPDATE "Account" 
+        SET balance = balance - ${amount},
+            "frozenBalance" = "frozenBalance" + ${amount}
+        WHERE id = ${fromAccountId};
+      `;
+
+      // 5. GHI LOG VÀO BẢNG TRANSACTIONS 
+      const transactionRecord = await tx.transaction.create({
+        data: {
+          fromAccountId,
+          toAccountId,
+          amount: amount, // Truyền trực tiếp object Decimal
+          type: TransactionType.TRANSFER,
+          status: TransactionStatus.PENDING, // Maker chỉ tạo PENDING
+          makerId: makerId, // Ghi nhận Teller nào tạo lệnh
+        },
+      });
+
+      // QUAN TRỌNG: KHÔNG GHI EVENT VÀO OUTBOX Ở BƯỚC NÀY
+      // Cronjob và Analytics không được quét các giao dịch PENDING
+
+      return { 
+        message: 'Lệnh chuyển tiền đã được tạo và đang chờ Quản lý duyệt', 
+        transactionId: transactionRecord.id 
+      };
+    });
+  }
+
+  async createMakerDeposit(makerId: string, customerAccountId: string, vaultAccountId: string, inputAmount: number | string) {
+    const amount = new Prisma.Decimal(inputAmount);
+    if (amount.lte(0)) throw new BadRequestException('Số tiền nạp phải lớn hơn 0');
+
+    return await this.prisma.$transaction(async (tx) => {
+      // 1. LOCK TÀI KHOẢN VAULT BẰNG RAW SQL
+      const vaultAcc: any[] = await tx.$queryRaw`
+        SELECT id, balance, "isVault" 
+        FROM "Account" 
+        WHERE id = ${vaultAccountId} 
+        FOR UPDATE; 
+      `;
+
+      if (!vaultAcc || vaultAcc.length === 0 || !vaultAcc[0].isVault) {
+        throw new BadRequestException('Tài khoản két sắt (Vault) không hợp lệ');
+      }
+
+      const currentBalance = new Prisma.Decimal(vaultAcc[0].balance);
+      if (currentBalance.lt(amount)) {
+        throw new BadRequestException('Két sắt chi nhánh không đủ hạn mức (Cần điều quỹ)');
+      }
+
+      // 2. TRỪ BALANCE CỦA VAULT, CỘNG VÀO FROZEN CỦA VAULT (Chờ Manager duyệt)
+      await tx.$executeRaw`
+        UPDATE "Account" 
+        SET balance = balance - ${amount},
+            "frozenBalance" = "frozenBalance" + ${amount}
+        WHERE id = ${vaultAccountId};
+      `;
+
+      // 3. TẠO LỊCH SỬ GIAO DỊCH
+      const transactionRecord = await tx.transaction.create({
+        data: {
+          fromAccountId: vaultAccountId,
+          toAccountId: customerAccountId,
+          amount: amount,
+          type: TransactionType.DEPOSIT,
+          status: TransactionStatus.PENDING,
+          makerId: makerId,
+        },
+      });
+
+      return { 
+        message: 'Lệnh NẠP TIỀN đã được tạo và đang chờ Quản lý duyệt', 
+        transactionId: transactionRecord.id 
+      };
+    });
+  }
+
+  // ==========================================
+  // LUỒNG MAKER: RÚT TIỀN MẶT TẠI QUẦY (WITHDRAWAL)
+  // Tiền số di chuyển từ: Customer Account -> Vault Account
+  // ==========================================
+  async createMakerWithdrawal(makerId: string, customerAccountId: string, vaultAccountId: string, inputAmount: number | string) {
+    const amount = new Prisma.Decimal(inputAmount);
+    if (amount.lte(0)) throw new BadRequestException('Số tiền rút phải lớn hơn 0');
+
+    return await this.prisma.$transaction(async (tx) => {
+      // 1. LOCK TÀI KHOẢN KHÁCH HÀNG BẰNG RAW SQL
+      const customerAcc: any[] = await tx.$queryRaw`
+        SELECT id, balance, status 
+        FROM "Account" 
+        WHERE id = ${customerAccountId} 
+        FOR UPDATE; 
+      `;
+
+      if (!customerAcc || customerAcc.length === 0) {
+        throw new BadRequestException('Không tìm thấy tài khoản khách hàng');
+      }
+
+      if (customerAcc[0].status !== 'ACTIVE') {
+        throw new BadRequestException('Tài khoản khách hàng chưa được kích hoạt hoặc đã bị đóng/ngủ đông');
+      }
+
+      const currentBalance = new Prisma.Decimal(customerAcc[0].balance);
+      if (currentBalance.lt(amount)) {
+        throw new BadRequestException('Số dư khách hàng không đủ để rút tiền');
+      }
+
+      // 2. ĐÓNG BĂNG TIỀN KHÁCH HÀNG (Trừ balance, cộng frozenBalance)
+      await tx.$executeRaw`
+        UPDATE "Account" 
+        SET balance = balance - ${amount},
+            "frozenBalance" = "frozenBalance" + ${amount}
+        WHERE id = ${customerAccountId};
+      `;
+
+      // 3. TẠO LỊCH SỬ GIAO DỊCH
+      const transactionRecord = await tx.transaction.create({
+        data: {
+          fromAccountId: customerAccountId,
+          toAccountId: vaultAccountId,
+          amount: amount,
+          type: TransactionType.WITHDRAWAL,
+          status: TransactionStatus.PENDING,
+          makerId: makerId,
+        },
+      });
+
+      return { 
+        message: 'Lệnh RÚT TIỀN đã được tạo và đang chờ Quản lý duyệt', 
+        transactionId: transactionRecord.id 
+      };
+    });
+  }
+
+  // ==========================================
+  // LUỒNG CHECKER (MANAGER): DUYỆT HOẶC TỪ CHỐI LỆNH
+  // ==========================================
+  async reviewMakerTransfer(checkerId: string, transactionId: string, action: 'APPROVE' | 'REJECT') {
+    return await this.prisma.$transaction(async (tx) => {
+      // 1. LOCK BẢNG TRANSACTION: Chống tình trạng 2 Manager cùng click duyệt 1 lệnh
+      const pendingTxs: any[] = await tx.$queryRaw`
+        SELECT * FROM "Transaction" 
+        WHERE id = ${transactionId} 
+        FOR UPDATE;
+      `;
+
+      if (!pendingTxs || pendingTxs.length === 0) {
+        throw new BadRequestException('Không tìm thấy giao dịch');
+      }
+
+      const transaction = pendingTxs[0];
+
+      // 2. Validate trạng thái và quyền hạn
+      if (transaction.status !== TransactionStatus.PENDING) {
+        throw new BadRequestException('Giao dịch không ở trạng thái chờ duyệt');
+      }
+
+      if (transaction.makerId === checkerId) {
+        throw new BadRequestException('Vi phạm quy tắc: Người tạo lệnh không được phép tự duyệt (Maker != Checker)');
+      }
+
+      // Chuẩn hóa amount thành Decimal
+      const amount = new Prisma.Decimal(transaction.amount);
+
+      if (action === 'APPROVE') {
+        // [KỊCH BẢN 1: MANAGER DUYỆT]
+        // Trừ frozenBalance của người gửi và Cộng thẳng vào balance của người nhận
+        await tx.$executeRaw`
+          UPDATE "Account" 
+          SET "frozenBalance" = "frozenBalance" - ${amount}
+          WHERE id = ${transaction.fromAccountId};
+        `;
+
+        await tx.$executeRaw`
+          UPDATE "Account" 
+          SET balance = balance + ${amount}
+          WHERE id = ${transaction.toAccountId};
+        `;
+
+        // Cập nhật trạng thái
+        await tx.transaction.update({
+          where: { id: transactionId },
+          data: {
+            status: TransactionStatus.APPROVED,
+            checkerId: checkerId,
+          },
+        });
+
+        // KỶ LUẬT: Chỉ ghi OutboxEvent khi tiền thực sự đã di chuyển
+        await tx.outboxEvent.create({
+          data: {
+            aggregateType: 'TRANSACTION',
+            aggregateId: transactionId,
+            eventType: 'FUNDS_TRANSFERRED',
+            payload: { 
+              fromAccountId: transaction.fromAccountId, 
+              toAccountId: transaction.toAccountId, 
+              amount: amount 
+            },
+          },
+        });
+
+        return { message: 'Đã DUYỆT giao dịch thành công. Tiền đã được chuyển đi.' };
+
+      } else {
+        // [KỊCH BẢN 2: MANAGER TỪ CHỐI]
+        // Hoàn trả tiền từ frozenBalance về balance cho người gửi
+        await tx.$executeRaw`
+          UPDATE "Account" 
+          SET "frozenBalance" = "frozenBalance" - ${amount},
+              balance = balance + ${amount}
+          WHERE id = ${transaction.fromAccountId};
+        `;
+
+        // Cập nhật trạng thái
+        await tx.transaction.update({
+          where: { id: transactionId },
+          data: {
+            status: TransactionStatus.REJECTED,
+            checkerId: checkerId,
+          },
+        });
+
+        // KỶ LUẬT: Lệnh bị hủy, dòng tiền không di chuyển -> KHÔNG sinh OutboxEvent.
+
+        return { message: 'Đã TỪ CHỐI giao dịch. Hoàn tất việc mở đóng băng tiền.' };
+      }
+    });
+  }
+}
+</file>
+
+<file path="src/users/dto/create-user.dto.ts">
+import { IsEmail, IsNotEmpty, IsString, MinLength, IsOptional, IsEnum } from 'class-validator';
+import { Role } from '@prisma/client'; // 1. Import Role Enum từ Prisma
+
+export class CreateUserDto {
+  @IsNotEmpty({ message: 'Email không được để trống' })
+  @IsEmail({}, { message: 'Email không đúng định dạng. VD: user@gmail.com' })
+  email: string;
+
+  @IsNotEmpty({ message: 'Tên đầy đủ không được để trống' })
+  @IsString({ message: 'Tên phải là chuỗi ký tự' })
+  @MinLength(3, { message: 'Tên phải có ít nhất 3 ký tự' })
+  fullName: string;
+
+  @IsNotEmpty({ message: 'Mật khẩu không được để trống' })
+  @IsString()
+  @MinLength(6, { message: 'Mật khẩu phải có ít nhất 6 ký tự bảo mật' })
+  password: string;
+
+  @IsOptional()
+  @IsEnum(Role, { message: 'Role không hợp lệ. Hệ thống chỉ chấp nhận USER hoặc ADMIN' }) // 2. Ràng buộc đầu vào phải là Enum
+  role?: Role; // 3. Đổi kiểu dữ liệu từ string sang Role
+}
+</file>
+
+<file path="src/users/users.controller.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { UsersController } from './users.controller';
+
+describe('UsersController', () => {
+  let controller: UsersController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [UsersController],
+    }).compile();
+
+    controller = module.get<UsersController>(UsersController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
+</file>
+
+<file path="src/users/users.controller.ts">
+import { Controller, Get, Param, Post, Body, Query, UnauthorizedException } from '@nestjs/common';
+import { UsersService } from './users.service';
+import { CreateUserDto } from './dto/create-user.dto';
+import { PaginationDto } from '../common/pagination.dto';
+
+@Controller('users')
+export class UsersController {
+  constructor(private readonly usersService: UsersService) {}
+
+  @Get()
+  findAll(@Query() paginationDto: PaginationDto) {
+    return this.usersService.findAll(paginationDto);
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.usersService.findOne(id);
+  }
+  @Post()
+  create(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.create(createUserDto)
+  }
+  @Post('login')
+  async login(@Body() body: any) {
+    const { email, password } = body;
+    const user = await this.usersService.validateUser(email, password);
+    
+    if (!user) {
+      throw new UnauthorizedException('Email hoặc mật khẩu không chính xác');
+    }
+    
+    // Tạm thời trả về thông tin user (Sau này học thêm bạn có thể bọc nó vào JWT Token)
+    return {
+      message: 'Đăng nhập hệ thống thành công',
+      ...user
+    };
+  }
+}
+</file>
+
+<file path="src/users/users.module.ts">
+import { Module } from '@nestjs/common';
+import { UsersService } from './users.service';
+import { UsersController } from './users.controller';
+
+@Module({
+  providers: [UsersService],
+  controllers: [UsersController]
+})
+export class UsersModule {}
+</file>
+
+<file path="src/users/users.service.spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { UsersService } from './users.service';
+
+describe('UsersService', () => {
+  let service: UsersService;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [UsersService],
+    }).compile();
+
+    service = module.get<UsersService>(UsersService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+</file>
+
+<file path="src/users/users.service.ts">
+import { Injectable } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+import * as bcrypt from 'bcrypt';
+import { CreateUserDto } from './dto/create-user.dto';
+import { Role } from '@prisma/client';
+import { PaginationDto } from '../common/pagination.dto';
+
+@Injectable()
+export class UsersService {
+  constructor(private prisma: PrismaService) {}
+
+  async create(createUserDto: CreateUserDto) {
+    // 1. Khai báo độ phức tạp của thuật toán băm (saltRounds = 10 là chuẩn hiện nay)
+    const { email, password: plainPassword, fullName, role } = createUserDto;
+
+    // 1. Khai báo độ phức tạp của thuật toán băm (saltRounds = 10 là chuẩn hiện nay)
+    const saltRounds = 10;
+
+    // 2. Băm mật khẩu
+    const hashedPassword = await bcrypt.hash(plainPassword, saltRounds);
+
+    // 3. Lưu mật khẩu đã băm xuống Database (Tuyệt đối không lưu plainPassword)
+    return await this.prisma.user.create({
+      data: {
+        email,
+        password: hashedPassword,
+        role: role || Role.CUSTOMER, 
+        profile: {
+          create: {
+            fullName: fullName,
+          },
+        },
+      },
+    });
+  }
+  async findAll(paginationDto: PaginationDto) {
+    const { page = 1, limit = 10 } = paginationDto;
+    const skip = (page - 1) * limit;
+
+    // Chạy song song 2 query: lấy data và đếm tổng số record
+    const [data, totalItems] = await this.prisma.$transaction([
+      this.prisma.user.findMany({
+        skip,
+        take: limit,
+        orderBy: { createdAt: 'desc' }, // Sắp xếp mới nhất lên đầu
+        include: {
+          profile: true,
+          accounts: true,
+        },
+      }),
+      this.prisma.user.count(),
+    ]);
+
+    const totalPages = Math.ceil(totalItems / limit);
+
+    // Trả về data kèm theo thông tin Metadata chuẩn chỉ
+    return {
+      items: data,
+      meta: {
+        totalItems,
+        itemsPerPage: limit,
+        currentPage: page,
+        totalPages,
+      },
+    };
+  }
+
+  async findOne(id: string) {
+    return this.prisma.user.findUnique({
+      where: { id },
+      include: {
+        profile: true,
+        accounts: true,
+      },
+    });
+  }
+  async validateUser(email: string, plainPassword: string) {
+    const user = await this.prisma.user.findUnique({ where: { email } });
+    if (!user) return null;
+
+    // Dùng hàm compare của bcrypt để so sánh mật khẩu người dùng nhập với chuỗi băm trong DB
+    const isMatch = await bcrypt.compare(plainPassword, user.password);
+    if (isMatch) {
+      const { password, ...result } = user; // Xóa password khỏi object trả về
+      return result;
+    }
+    return null;
+  }
+}
+</file>
+
+<file path="test-api.http">
+POST http://localhost:3000/transactions/transfer
+Content-Type: application/json
+
+{
+  "fromAccountId": "526a1fe6-077b-46d1-a7d4-c7b5ff1fef42",
+  "toAccountId": "f63b9f91-134e-4e09-839c-53c7db99cde3",
+  "amount": 100
+}
+</file>
+
+<file path="test/app.e2e-spec.ts">
+import { Test, TestingModule } from '@nestjs/testing';
+import { INestApplication } from '@nestjs/common';
+import request from 'supertest';
+import { App } from 'supertest/types';
+import { AppModule } from './../src/app.module';
+
+describe('AppController (e2e)', () => {
+  let app: INestApplication<App>;
+
+  beforeEach(async () => {
+    const moduleFixture: TestingModule = await Test.createTestingModule({
+      imports: [AppModule],
+    }).compile();
+
+    app = moduleFixture.createNestApplication();
+    await app.init();
+  });
+
+  it('/ (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/')
+      .expect(200)
+      .expect('Hello World!');
+  });
+
+  afterEach(async () => {
+    await app.close();
+  });
+});
+</file>
+
+<file path="test/jest-e2e.json">
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  }
+}
+</file>
+
+<file path="tsconfig.build.json">
+{
+  "extends": "./tsconfig.json",
+  "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
+}
+</file>
+
+<file path="tsconfig.json">
+{
+  "compilerOptions": {
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "resolvePackageJsonExports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2023",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "noFallthroughCasesInSwitch": false
+  }
+}
+</file>
+
+</files>

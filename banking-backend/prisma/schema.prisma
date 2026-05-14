@@ -1,0 +1,214 @@
+// This is your Prisma schema file
+
+generator client {
+  provider = "prisma-client-js" // Sửa lại thành prisma-client-js để dùng với NestJS
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ==========================================
+// THIẾT LẬP ENUM CHO PHÂN QUYỀN VÀ TRẠNG THÁI
+// ==========================================
+
+enum Role {
+  CUSTOMER
+  TELLER
+  MANAGER
+  AUDITOR
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  APPROVED
+  REJECTED
+  FAILED
+}
+
+enum TransactionType {
+  DEPOSIT
+  WITHDRAWAL
+  TRANSFER
+}
+
+enum AccountStatus {
+  PENDING_KYC
+  ACTIVE
+  DORMANT
+  CLOSED
+}
+
+// ==========================================
+// PHASE 1: CORE BANKING SCHEMA
+// ==========================================
+
+// 1. Users: CHỈ chứa Auth Data (Tuyệt đối không nhét Demographics)
+model User {
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+  role     Role   @default(CUSTOMER)
+
+  // Quan hệ (Relations)
+  profile          CustomerProfile?
+  accounts         Account[]
+  employeeRecord   Employee?
+  loanApplications LoanApplication[]
+
+  madeTransactions    Transaction[] @relation("MakerRelation")
+  checkedTransactions Transaction[] @relation("CheckerRelation")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// 2. Customer_Profiles: Chứa Demographics phục vụ HMDA sau này
+model CustomerProfile {
+  id        String @id @default(uuid())
+  userId    String @unique
+  user      User   @relation(fields: [userId], references: [id])
+
+  fullName  String   // <--- BẠN THÊM DÒNG NÀY VÀO ĐÂY NHÉ
+  age       Int?
+  gender    String?
+  education String?
+  income    Decimal? @db.Decimal(15, 2) // Thu nhập cũng quy về tiền
+}
+
+// 3. Branches: Quản lý chi nhánh
+model Branch {
+  id       String  @id @default(uuid())
+  name     String
+  code     String  @unique
+  location String?
+
+  isActive  Boolean   @default(true) // Soft delete
+  deletedAt DateTime? // Lưu thời điểm đóng cửa chi nhánh
+
+  employees Employee[]
+}
+
+// 4. Employees: Quản lý nhân sự
+model Employee {
+  id     String @id @default(uuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id])
+
+  branchId String
+  branch   Branch @relation(fields: [branchId], references: [id])
+
+  position  String
+  isActive  Boolean   @default(true) // Soft delete
+  deletedAt DateTime? // Lưu thời điểm nghỉ việc
+}
+
+// 5. Accounts: Quản lý số dư tài khoản
+model Account {
+  id     String  @id @default(uuid())
+  userId String? // Cho phép null nếu đây là tài khoản Vault (két sắt) của ngân hàng
+  user   User?   @relation(fields: [userId], references: [id])
+
+  // RULE: Tất cả tiền bạc phải dùng Decimal(15, 2)
+  balance       Decimal @default(0.00) @db.Decimal(15, 2)
+  frozenBalance Decimal @default(0.00) @db.Decimal(15, 2)
+
+  status  AccountStatus @default(PENDING_KYC) // Máy trạng thái tài khoản
+  isVault Boolean       @default(false) // Cờ nhận diện tài khoản Két sắt chi nhánh
+
+  transactionsFrom Transaction[] @relation("FromAccount")
+  transactionsTo   Transaction[] @relation("ToAccount")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ==========================================
+// BẢNG LƯU LỊCH SỬ BIẾN ĐỘNG DEMOGRAPHICS (MỤC B.5)
+// ==========================================
+model CustomerProfileAudit {
+  id            String   @id @default(uuid())
+  profileId     String
+  userId        String
+  
+  // Lưu lại các giá trị CŨ trước khi bị thay đổi
+  oldAge        Int?
+  oldGender     String?
+  oldEducation  String?
+  oldIncome     Decimal? @db.Decimal(15, 2)
+  
+  changedAt     DateTime @default(now())
+
+  @@map("CustomerProfile_Audit") // Ép tên bảng dưới DB để query cho chuẩn
+}
+
+// 6. Transactions: Lịch sử giao dịch
+model Transaction {
+  id String @id @default(uuid())
+
+  fromAccountId String? // Cho phép null nếu nạp tiền mặt tại quầy
+  fromAccount   Account? @relation("FromAccount", fields: [fromAccountId], references: [id])
+
+  toAccountId String? // Cho phép null nếu rút tiền mặt
+  toAccount   Account? @relation("ToAccount", fields: [toAccountId], references: [id])
+
+  // RULE: Tất cả tiền bạc phải dùng Decimal(15, 2)
+  amount Decimal           @db.Decimal(15, 2)
+  status TransactionStatus @default(PENDING)
+  type   TransactionType
+
+  makerId String?
+  maker   User?   @relation("MakerRelation", fields: [makerId], references: [id])
+
+  checkerId String?
+  checker   User?   @relation("CheckerRelation", fields: [checkerId], references: [id])
+
+  createdAt DateTime @default(now())
+  @@index([fromAccountId], name: "idx_transaction_from_account_id")
+  @@index([toAccountId], name: "idx_transaction_to_account_id")
+}
+
+// 7. Outbox_Events: Queue lưu event cho xử lý bất đồng bộ và đối soát
+model OutboxEvent {
+  id            String  @id @default(uuid())
+  aggregateType String // Ví dụ: "Transaction"
+  aggregateId   String // Chứa ID của Transaction
+  eventType     String // Ví dụ: "MoneyTransferred"
+  payload       Json // Lưu data dạng JSONB trong PostgreSQL
+  isProcessed   Boolean @default(false)
+  isAnalyticsProcessed Boolean @default(false)
+  retryCount    Int     @default(0) 
+  isFailed      Boolean @default(false)
+  createdAt DateTime @default(now())
+  @@index([aggregateId], name: "idx_outbox_aggregate_id")
+}
+
+// 8. Loan_Applications: Cầu nối logic với phần HMDA 
+model LoanApplication {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  // RULE: Tiền bạc
+  loanAmount Decimal @db.Decimal(15, 2)
+  status     String  @default("PENDING") // PENDING, APPROVED, REJECTED
+
+  createdAt DateTime @default(now())
+}
+
+// ==========================================
+// BẢNG LOG IDEMPOTENCY: CHỐNG TRÙNG LẶP GIAO DỊCH
+// ==========================================
+model IdempotencyLog {
+  id             String   @id @default(uuid())
+  key            String   @unique // Đánh unique để tự động chặn trùng lặp ở tầng DB
+  requestPath    String   // Ghi lại xem user đang gọi API nào (VD: /transactions/maker/transfer)
+  responseBody   Json     // Lưu lại kết quả trả về để gửi lại nếu bị gọi trùng
+  responseStatus Int      // Lưu lại HTTP Status Code (VD: 201, 400)
+
+  createdAt      DateTime @default(now())
+
+  // Đánh index để tốc độ tìm kiếm key cực nhanh (vì Interceptor phải check liên tục)
+  @@index([key], name: "idx_idempotency_key")
+}

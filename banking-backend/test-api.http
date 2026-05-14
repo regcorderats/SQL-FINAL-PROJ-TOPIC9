@@ -1,0 +1,8 @@
+POST http://localhost:3000/transactions/transfer
+Content-Type: application/json
+
+{
+  "fromAccountId": "526a1fe6-077b-46d1-a7d4-c7b5ff1fef42",
+  "toAccountId": "f63b9f91-134e-4e09-839c-53c7db99cde3",
+  "amount": 100
+}
